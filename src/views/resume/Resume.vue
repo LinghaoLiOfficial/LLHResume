@@ -1,10 +1,16 @@
 <template>
   <section class="relative min-h-screen overflow-hidden bg-[#121212] px-6 py-12 font-['Inter','Roboto','sans-serif'] text-white md:px-10">
-    <div class="pointer-events-none absolute inset-0">
+    <canvas
+      ref="matrixCanvas"
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-0 z-[1] h-screen w-screen opacity-90"
+    />
+
+    <div class="pointer-events-none fixed inset-0 z-0">
       <div class="absolute left-[12%] top-16 h-72 w-72 rounded-full bg-[#24c781]/25 blur-[120px]" />
       <div class="absolute bottom-20 right-[14%] h-80 w-80 rounded-full bg-[#24c781]/20 blur-[140px]" />
       <p
-        class="absolute right-2 top-1/2 -translate-y-1/2 rotate-180 text-[130px] font-bold uppercase leading-none tracking-[0.24em] text-[#24c781]/10 [writing-mode:vertical-rl]"
+        class="absolute right-6 top-1/2 -translate-y-1/2 rotate-180 text-[130px] font-bold uppercase leading-none tracking-[0.24em] text-[#24c781]/15 [writing-mode:vertical-rl]"
       >
         Resume
       </p>
@@ -1152,7 +1158,7 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 interface StatItem {
   number: string;
@@ -1191,6 +1197,177 @@ interface FeaturedSeminarItem {
 }
 
 const avatarSrc = ref('/avatar.jpg');
+const matrixCanvas = ref<HTMLCanvasElement | null>(null);
+
+type MatrixColumn = {
+  y: number;
+  speed: number;
+  trailLength: number;
+  characters: string[];
+};
+
+const matrixCharacters = '01010123456789';
+const matrixFontSize = 18;
+const matrixColumnWidth = 22;
+const matrixFrameDelay = 44;
+
+let matrixColumns: MatrixColumn[] = [];
+let matrixAnimationFrame = 0;
+let lastMatrixFrame = 0;
+let reducedMotionQuery: MediaQueryList | null = null;
+let logicalCanvasWidth = 0;
+let logicalCanvasHeight = 0;
+
+const randomMatrixCharacter = () => matrixCharacters[Math.floor(Math.random() * matrixCharacters.length)];
+
+const createMatrixColumns = () => {
+  const columnCount = Math.ceil(logicalCanvasWidth / matrixColumnWidth);
+
+  matrixColumns = Array.from({ length: columnCount }, () => ({
+    y: Math.random() * logicalCanvasHeight,
+    speed: 0.8 + Math.random() * 1.8,
+    trailLength: 5 + Math.floor(Math.random() * 5),
+    characters: Array.from({ length: 9 }, randomMatrixCharacter),
+  }));
+};
+
+const sizeMatrixCanvas = () => {
+  const canvas = matrixCanvas.value;
+  const context = canvas?.getContext('2d');
+
+  if (!canvas || !context) {
+    return;
+  }
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  logicalCanvasWidth = Math.ceil(window.innerWidth);
+  logicalCanvasHeight = Math.ceil(window.innerHeight);
+
+  canvas.width = Math.floor(logicalCanvasWidth * dpr);
+  canvas.height = Math.floor(logicalCanvasHeight * dpr);
+  canvas.style.width = `${logicalCanvasWidth}px`;
+  canvas.style.height = `${logicalCanvasHeight}px`;
+  context.setTransform(dpr, 0, 0, dpr, 0, 0);
+  context.clearRect(0, 0, logicalCanvasWidth, logicalCanvasHeight);
+
+  createMatrixColumns();
+};
+
+const drawStaticMatrixTexture = () => {
+  const canvas = matrixCanvas.value;
+  const context = canvas?.getContext('2d');
+
+  if (!canvas || !context) {
+    return;
+  }
+
+  context.clearRect(0, 0, logicalCanvasWidth, logicalCanvasHeight);
+  context.font = `${matrixFontSize}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace`;
+  context.textAlign = 'center';
+  context.textBaseline = 'top';
+  context.fillStyle = 'rgba(36, 199, 129, 0.12)';
+
+  matrixColumns.forEach((_, columnIndex) => {
+    const x = columnIndex * matrixColumnWidth + matrixColumnWidth / 2;
+    for (let y = 0; y < logicalCanvasHeight; y += matrixFontSize * 6) {
+      if (Math.random() > 0.62) {
+        context.fillText(randomMatrixCharacter(), x, y + Math.random() * matrixFontSize * 4);
+      }
+    }
+  });
+};
+
+const drawMatrixRain = (timestamp: number) => {
+  const canvas = matrixCanvas.value;
+  const context = canvas?.getContext('2d');
+
+  if (!canvas || !context) {
+    return;
+  }
+
+  if (timestamp - lastMatrixFrame < matrixFrameDelay) {
+    matrixAnimationFrame = window.requestAnimationFrame(drawMatrixRain);
+    return;
+  }
+
+  lastMatrixFrame = timestamp;
+  context.clearRect(0, 0, logicalCanvasWidth, logicalCanvasHeight);
+  context.font = `${matrixFontSize}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace`;
+  context.textAlign = 'center';
+  context.textBaseline = 'top';
+  context.shadowColor = 'transparent';
+  context.shadowBlur = 0;
+
+  matrixColumns.forEach((column, columnIndex) => {
+    const x = columnIndex * matrixColumnWidth + matrixColumnWidth / 2;
+
+    for (let trailIndex = 0; trailIndex < column.trailLength; trailIndex += 1) {
+      const y = column.y - trailIndex * matrixFontSize;
+
+      if (y < -matrixFontSize || y > logicalCanvasHeight + matrixFontSize) {
+        continue;
+      }
+
+      const opacity = trailIndex === 0 ? 0.95 : Math.max(0.08, 0.48 - trailIndex * 0.07);
+      context.fillStyle = trailIndex === 0
+        ? `rgba(154, 233, 196, ${opacity})`
+        : `rgba(36, 199, 129, ${opacity})`;
+      context.fillText(column.characters[trailIndex] ?? randomMatrixCharacter(), x, y);
+    }
+
+    column.y += matrixFontSize * column.speed;
+    column.characters.unshift(randomMatrixCharacter());
+    column.characters.length = column.trailLength;
+
+    if (column.y > logicalCanvasHeight + Math.random() * 900) {
+      column.y = -Math.random() * logicalCanvasHeight * 0.35;
+      column.speed = 0.8 + Math.random() * 1.8;
+      column.trailLength = 5 + Math.floor(Math.random() * 5);
+      column.characters = Array.from({ length: column.trailLength }, randomMatrixCharacter);
+    }
+  });
+
+  matrixAnimationFrame = window.requestAnimationFrame(drawMatrixRain);
+};
+
+const startMatrixRain = () => {
+  window.cancelAnimationFrame(matrixAnimationFrame);
+  lastMatrixFrame = 0;
+
+  if (reducedMotionQuery?.matches) {
+    drawStaticMatrixTexture();
+    return;
+  }
+
+  matrixAnimationFrame = window.requestAnimationFrame(drawMatrixRain);
+};
+
+const handleReducedMotionChange = () => {
+  sizeMatrixCanvas();
+  startMatrixRain();
+};
+
+const handleMatrixResize = () => {
+  sizeMatrixCanvas();
+  startMatrixRain();
+};
+
+onMounted(() => {
+  reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  sizeMatrixCanvas();
+  startMatrixRain();
+
+  window.addEventListener('resize', handleMatrixResize);
+  window.visualViewport?.addEventListener('resize', handleMatrixResize);
+  reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+});
+
+onBeforeUnmount(() => {
+  window.cancelAnimationFrame(matrixAnimationFrame);
+  window.removeEventListener('resize', handleMatrixResize);
+  window.visualViewport?.removeEventListener('resize', handleMatrixResize);
+  reducedMotionQuery?.removeEventListener('change', handleReducedMotionChange);
+});
 
 const socialLinks: SocialItem[] = [
   { name: 'LinkedIn', icon: 'mdi:linkedin', link: '#' },

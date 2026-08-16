@@ -235,3 +235,45 @@
 - Actions: 修改 `src/views/resume/Resume.vue` 中该科研成果的论文标题与描述段落，并同步更新 `codex-project-tech-doc.md`。
 - Result: 该论文条目现在使用英文题名 `A Composite LLM-Based Decision Network for Dynamic Assessment of Negative Public Opinion in New Energy Vehicles`，正文描述也改为学术英文。
 - Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-17 00:41 +08 - 新增 Matrix 数字雨背景
+
+- Request: 用户要求按既定方案实现黑客帝国风格绿色随机数字雨背景动画，并在落下过程中逐渐消失。
+- Actions: 修改 `src/views/resume/Resume.vue`，在简历根 section 增加全屏背景 `canvas`，使用 Vue 生命周期管理高清画布、ResizeObserver、`requestAnimationFrame`、随机数字绘制和 `prefers-reduced-motion` 静态降级；同时弱化原绿色光斑以免背景拥挤。
+- Result: 简历页新增不阻挡内容的绿色数字雨背景，字符通过半透明深色覆盖逐帧淡出，主体卡片保持前景层级和高可读性。
+- Verification: 已运行 `npm run build`，构建通过；已启动 `npm run dev`，因 8080 被占用自动使用 `http://localhost:8081/`；已用应用浏览器确认页面标题、canvas 存在且可见、主体 article 可见，并保存预览截图到 `/tmp/codex-resume-matrix-check/resume-matrix-preview.jpg`。
+
+## 2026-08-17 00:52 +08 - 优化 Matrix 数字雨滚动性能
+
+- Request: 用户反馈纵向滚动网页中 Matrix 数字雨背景非常卡顿，要求按固定视口画布方案优化。
+- Actions: 修改 `src/views/resume/Resume.vue`，将数字雨 canvas 从整页 `absolute h-full` 改为 `fixed h-screen w-screen`，尺寸来源改为 `window.innerWidth/innerHeight`，移除 `ResizeObserver`，改用 `window.resize` 与 `visualViewport.resize`，并限制 DPR、增大列间距、降低文字阴影开销。
+- Result: 数字雨动画现在只重绘当前视口，不再对约一万像素高的整页画布逐帧绘制，滚动时背景保持固定且不阻挡主体内容。
+- Verification: 已运行 `npm run build`，构建通过；已用应用浏览器检查 `http://localhost:8080/`，确认页面 `bodyScrollHeight` 约 `10417px` 时 canvas 仍为视口 `1280x720`，滚动至中段后 canvas 仍固定在 `top: 0`，并保存预览截图到 `/tmp/codex-resume-matrix-check/resume-matrix-optimized.jpg`。
+
+## 2026-08-17 00:57 +08 - 去除数字雨浅绿色残影
+
+- Request: 用户认为数字雨过后的印记留存时间过长，导致背景变成条纹状，希望直接去除浅绿色印记。
+- Actions: 修改 `src/views/resume/Resume.vue`，删除每列头部后方额外绘制的浅绿色拖影字符，关闭文字阴影，并将每帧深色覆盖层透明度从 `0.1` 提高到 `0.28`。
+- Result: 数字雨旧字符更快消失，不再通过浅绿色残影形成明显竖向条纹，背景更干净。
+- Verification: 已运行 `npm run build`，构建通过；已用应用浏览器检查 `http://localhost:8080/`，确认 canvas 仍为固定视口背景并保存预览截图到 `/tmp/codex-resume-matrix-check/resume-matrix-no-trail.jpg`。
+
+## 2026-08-17 01:03 +08 - 恢复光斑与 Resume 背景层
+
+- Request: 用户要求保留原有背景中的绿色光斑和绿色 `Resume` 文字，并将它们放到数字雨后面。
+- Actions: 修改 `src/views/resume/Resume.vue`，将数字雨 canvas 提升为 `z-[1]`，原光斑和竖排 `Resume` 背景层保持 `z-0`，并恢复光斑为原先的绿色透明度强度。
+- Result: 页面背景层级变为原光斑/`Resume` 在底层、数字雨在中层、简历主体内容在 `z-10` 顶层。
+- Verification: 已运行 `npm run build`，构建通过；已用应用浏览器检查 `http://localhost:8080/`，确认背景层 `z-index: 0`、canvas `z-index: 1`、主体内容 `z-index: 10`，并保存预览截图到 `/tmp/codex-resume-matrix-check/resume-matrix-layered.jpg`。
+
+## 2026-08-17 01:10 +08 - 让底层光斑和 Resume 透出
+
+- Request: 用户反馈绿色光斑和绿色 `Resume` 文字仍未显示。
+- Actions: 修改 `src/views/resume/Resume.vue`，将数字雨 canvas 从深色填充改为透明 `clearRect` 清空，仅绘制当前帧数字；同时将光斑/`Resume` 背景层改为 `fixed inset-0 z-0`，并把 `Resume` 从 `text-[#24c781]/10` 调整为 `/15`。
+- Result: 数字雨不再用深色矩形遮挡底层背景，原绿色光斑和竖排 `Resume` 能在数字雨后方显示。
+- Verification: 已运行 `npm run build`，构建通过；已用应用浏览器检查 `http://localhost:8080/`，确认背景层为 `fixed z-0`、canvas 为 `fixed z-[1]`，并保存预览截图到 `/tmp/codex-resume-matrix-check/resume-matrix-visible-bg.jpg`。
+
+## 2026-08-17 01:14 +08 - 恢复数字雨短串效果
+
+- Request: 用户反馈透明清空 canvas 后数字雨变成只有单个数字坠落。
+- Actions: 修改 `src/views/resume/Resume.vue`，为每个 Matrix 列增加 `trailLength` 和字符缓存，每帧透明清空后即时绘制 5-9 个逐渐变淡的数字短串，而不是依赖旧帧残影。
+- Result: 数字雨恢复连续短串下落效果，同时不会留下持久浅绿色印记，也不会遮挡底层光斑和 `Resume`。
+- Verification: 已运行 `npm run build`，构建通过；已用应用浏览器检查 `http://localhost:8080/`，确认固定透明 canvas、底层装饰和短串数字雨同时存在，并保存预览截图到 `/tmp/codex-resume-matrix-check/resume-matrix-trail-restored.jpg`。

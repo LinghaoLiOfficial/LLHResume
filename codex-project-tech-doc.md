@@ -10,6 +10,8 @@
 - `src/main.ts` 创建并挂载 Vue 应用。
 - `src/App.vue` 是应用根组件。
 - `src/views/resume/Resume.vue` 承载主要简历页面视图。
+- `src/views/resume/Resume.vue` 内置 Matrix 风格绿色随机数字雨背景；原绿色光斑和竖排 `Resume` 文字使用 `fixed inset-0 z-0` 底层，canvas 使用 `fixed inset-0 h-screen w-screen`、`z-[1]` 与 `pointer-events-none`，主体内容保持 `relative z-10`。
+- 数字雨动画使用 `requestAnimationFrame`，canvas 每帧通过 `clearRect` 透明清空后为每列即时绘制 5-9 个逐渐变淡的数字短串，只绘制当前 viewport 尺寸，DPR 上限为 `1.5`，不再依赖旧帧残影、文字阴影或深色覆盖层，并通过 `prefers-reduced-motion` 在减少动态效果时切换为淡绿色静态纹理。
 - 简历头部姓名区域采用中文名在上、英文名与昵称 `Linghao Li (Lion)` 在下的垂直展示。
 - 左侧联系方式采用纵向列表，邮箱独立展示；电话、微信、WhatsApp 合并为一个“联系号码”条目，并用 `电话 · 微信 · WhatsApp` 标明支持渠道。
 - 左侧个人信息区在联系方式下方展示出生日期 `2002 年 11 月 21 日`，使用 `lucide:calendar-days` 图标。
@@ -45,12 +47,14 @@
 
 - 当前已验证命令: `npm run build`
 - 构建链路包括 `vue-tsc --build` 和 `vite build`。
+- Matrix 数字雨背景已通过本地开发服务 `http://localhost:8080/` 做浏览器检查，确认长页面中 canvas 保持视口尺寸 `1280x720` 且滚动后仍固定在 `top: 0`，主体 article 保持可见；当前版本已去除持久浅绿色残影以避免背景形成竖向条纹，并通过每帧重绘短数字串保持雨状连续感，原光斑/`Resume` 背景层可在透明数字雨后方显示。
 
 ## Current Decisions and Conventions
 
 - favicon 使用 SVG，以便在高分辨率屏幕上保持清晰。
 - 页面标题在 `index.html` 中维护。
 - 资源文件放在 `public/`，由 Vite 以根路径方式引用。
+- 背景氛围效果优先使用固定视口 canvas，不使用大量 DOM 字符节点，也不使用整页 `scrollHeight` 画布；动画应保持在背景层，不能阻挡滚动、点击或主体文字阅读。
 - `vite.config.ts` 中只固定 `server.port = 8080`，不再单独指定 `server.hmr.port`，避免 HTTP 页面和 HMR WebSocket 抢占同一端口导致浏览器显示 `Upgrade Required`。
 
 ## Known Issues and Follow-ups
