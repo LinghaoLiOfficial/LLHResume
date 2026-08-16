@@ -1,3 +1,17 @@
+## 2026-08-16 20:30 +08 - 新增科研项目经历
+
+- Request: 用户要求把核心技术材料文件对应的 `【大数据科研论文AI定位评估机制，2026.05 - 2026.06，中国科学院大学】` 项目写进“项目&研究经验”模块。
+- Actions: 修改 `src/views/resume/Resume.vue`，在“项目&研究经验”顶部新增一条 2026.05 - 2026.06 的项目卡片，补充项目标题、机构、方法说明以及时间与位置标签；随后运行构建验证。
+- Result: 简历页面已包含该科研项目条目，文案聚焦论文摘要中的 AI 使用环节识别、功能识别、AI 定位与必要性评估四维机制。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 20:38 +08 - 强化科研项目收益表述
+
+- Request: 用户要求在该科研项目描述中补充并批量进行的 LLM 推理提速和 Token 成本下降。
+- Actions: 修改 `src/views/resume/Resume.vue` 中项目描述段落，加入“极大加快 LLM 总体推理速度”和“显著降低 Token 成本”的收益表述，并重新构建验证。
+- Result: 该项目条目现在同时体现方法框架与实际收益，表达更完整。
+- Verification: 已运行 `npm run build`，构建通过。
+
 ## 2026-08-16 14:06 +08 - 更新网页标签标题与图标
 
 - Request: 用户要求将网页标签名称更换为 `Linghao Li Resume`，并为网页标签寻找一个炫酷的 icon。
@@ -144,3 +158,80 @@
 - Actions: 检查 `8080` 与 `5173` 端口监听状态，停止异常 Vite 进程，修改 `vite.config.ts` 移除硬编码的 `server.hmr.port = 8080`，重新以 `npm run dev` 启动默认 `8080` 服务。
 - Result: `http://localhost:8080/` 现在正常返回简历页面 HTML，避免 HMR WebSocket 与页面 HTTP 服务抢占同一端口。
 - Verification: 已用 `curl -i http://localhost:8080/` 确认返回 `HTTP/1.1 200 OK` 和 HTML；已运行 `npm run build`，构建通过。
+
+## 2026-08-16 20:17 +08 - 收窄参会经历地点列宽度
+
+- Request: 用户要求缩小“调研&参会经历”模块的“地点/机构”字段宽度。
+- Actions: 修改 `src/views/resume/Resume.vue` 中该表格列的 `th`/`td` 样式，给“地点/机构”列设置固定宽度并允许长文本换行。
+- Result: 地点/机构列不再被长英文机构名撑宽，表格整体更紧凑。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 21:51 +08 - 新增 AI 暴露度计算项目经历
+
+- Request: 用户要求将核心技术材料对应的 2025.08 - 2026.07 中国科学院大学项目写入“项目&研究经验”，并与已有 LLM 专家定位评估项目区分。
+- Actions: 阅读用户提供的 AI 暴露度计算 PDF 与 Markdown 技术材料，修改 `src/views/resume/Resume.vue`，在项目模块新增 `【科研计量实验】AI 暴露度计算与科研方法替代潜力测算程序` 独立条目；同步更新项目技术文档。
+- Result: 新条目展示了三阶段 AI 暴露度测算框架、AI 技术库与历史方法库匹配、分块持久化、批量 LLM 推理提速和总体调用成本下降，已有 2026.05 - 2026.06 的 LLM 专家定位评估项目保持独立。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 22:00 +08 - 优化两个中科院项目描述边界
+
+- Request: 用户要求优化“百万级科研论文 LLM 专家定位评估实验程序”和“百万级 AI 暴露度计算与科研方法替代潜力测算程序”的描述，明确前者关注已使用 AI 论文中的 AI 重要程度，后者关注能源转型与气候变化全量论文使用 AI 进行科研的潜力。
+- Actions: 修改 `src/views/resume/Resume.vue` 中两个中国科学院大学项目的描述段落，并更新 `codex-project-tech-doc.md` 中的项目边界说明。
+- Result: 两个条目的研究对象和指标含义已分清：前者强调 AI 方法学定位与必要性强度，后者强调全量主题论文科研流程被 AI 原生方法重构或替代的潜力。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 22:07 +08 - 补充 AI 暴露度项目依赖式三阶段难点
+
+- Request: 用户要求在“百万级 AI 暴露度计算与科研方法替代潜力测算程序”条目中体现三阶段逻辑依赖，不能直接全量批量推理。
+- Actions: 修改 `src/views/resume/Resume.vue` 中该项目的描述段落，并同步更新 `codex-project-tech-doc.md` 的项目边界说明。
+- Result: 项目描述现在明确了先筛选、再阶段映射、再暴露度计算的依赖式流程，以及无法一步式对全量论文直接批推的技术约束。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 22:12 +08 - 精简 AI 暴露度项目表述
+
+- Request: 用户要求进一步优化“百万级 AI 暴露度计算与科研方法替代潜力测算程序”条目的文字表述。
+- Actions: 精简 `src/views/resume/Resume.vue` 中该项目的描述句式，并同步收紧 `codex-project-tech-doc.md` 的项目边界说明。
+- Result: 描述更清楚地突出了“全量相关论文”“三阶段依赖式测算”“无法一步式批推但仍可高效运行”。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 22:18 +08 - 修正 AI 暴露度句式冲突
+
+- Request: 用户指出“因此无法直接对全量论文一步式批量推理，但仍可支持百万级论文规模的高效运行”表述不够顺。
+- Actions: 修改 `src/views/resume/Resume.vue` 中对应句子，将其改写为分阶段串联处理的表达，并同步更新 `codex-project-tech-doc.md`。
+- Result: 句子从“否定一步式推理 + 反向补充高效运行”改为“分阶段串联处理 + 支撑百万级高效运行”，语义更顺。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 22:17 +08 - 新增公共管理学报论文科研成果
+
+- Request: 用户要求将论文《人智协同驱动的复杂网络舆情涌现机制及其生成式治理研究》写入“科研成果”，并标注学生一作、公共管理学报期刊、评审一轮中、2026.04 - 至今。
+- Actions: 只读提取用户提供的 DOCX 论文标题与摘要信息，修改 `src/views/resume/Resume.vue`，在“科研成果”顶部新增对应期刊论文卡片；同步更新 `codex-project-tech-doc.md`。
+- Result: 简历科研成果已新增该论文，包含评审状态、作者身份、期刊平台、时间与基于摘要概括的研究说明。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 22:20 +08 - 优化公共管理学报论文方向标签
+
+- Request: 用户要求优化科研成果中“复杂治理与数字治理方向高度契合”的表述。
+- Actions: 修改 `src/views/resume/Resume.vue` 中该论文绿色标签行，将方向匹配表述改为更具体的“复杂系统治理、数字治理与人智协同前沿议题”。
+- Result: 该科研成果条目的期刊与方向标签更贴合论文主题和公共管理表达。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 23:02 +08 - 提炼个人介绍总结
+
+- Request: 用户要求模仿给定格式，总结当前简历人物的背景与核心技能。
+- Actions: 只读核对 `src/views/resume/Resume.vue` 中的姓名、教育背景、能力简介、项目研究与演讲经历。
+- Result: 提炼出李凌浩以企业人工智能、LLM 科研应用、跨领域算法结合、全栈 Web 开发和项目协作为核心的复合型画像。
+- Verification: 已完成简历内容交叉核对，未修改业务代码。
+
+## 2026-08-16 23:15 +08 - 新增新能源汽车舆情评估论文科研成果
+
+- Request: 用户要求将论文《基于大语言模型复合决策网络的新能源汽车负面舆情动态评估框架》写入“科研成果”，并标注一作、撰写中、2026.06 - 至今。
+- Actions: 只读参考用户提供的技术框架材料，修改 `src/views/resume/Resume.vue`，在“科研成果”顶部新增对应期刊论文卡片；同步更新 `codex-project-tech-doc.md`。
+- Result: 简历科研成果已新增该论文，包含撰写状态、作者身份、时间以及动态指标裂变、RAG、对比思维链、多智能体贝叶斯研判和 LLM-FCE-TOPSIS 策略寻优等研究说明。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-16 23:17 +08 - 英文化新能源汽车舆情评估论文条目
+
+- Request: 用户指出该论文最终以英文呈现，因此论文标题和描述都应改为学术英文。
+- Actions: 修改 `src/views/resume/Resume.vue` 中该科研成果的论文标题与描述段落，并同步更新 `codex-project-tech-doc.md`。
+- Result: 该论文条目现在使用英文题名 `A Composite LLM-Based Decision Network for Dynamic Assessment of Negative Public Opinion in New Energy Vehicles`，正文描述也改为学术英文。
+- Verification: 已运行 `npm run build`，构建通过。

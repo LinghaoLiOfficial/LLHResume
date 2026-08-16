@@ -242,6 +242,48 @@
                               <Icon icon="lucide:file-text" class="text-xl" />
                           </div>
                           <div>
+                              <p class="text-lg max-w-2xl font-semibold text-white">【撰写中】期刊论文《 A Composite LLM-Based Decision Network for Dynamic Assessment of Negative Public Opinion in New Energy Vehicles 》</p>
+                              <p class="mt-1 max-w-2xl text-sm font-medium text-[#24c781]">一作，人工智能&舆情治理方向</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                                  This study develops a composite LLM-based decision network for dynamically assessing negative public opinion in the new energy vehicle sector, where technical complexity, high-noise social media data, coordinated manipulation, and nonlinear crisis propagation jointly challenge conventional sentiment analysis and static risk evaluation. The proposed framework elevates LLMs from generic text-processing tools to composite decision agents that integrate semantic reasoning, adaptive knowledge updating, and operations-research-based quantitative evaluation. It first constructs an evolving indicator network through multi-source heterogeneous data ingestion and emerging terminology tracking; then combines retrieval-augmented generation with contrastive chain-of-thought reasoning to distinguish authentic engineering feedback from manipulated opinion signals. The framework further instantiates heterogeneous expert agents, including engineering, legal-compliance, and consumer-rights perspectives, and aggregates their probabilistic judgments through Bayesian belief updating. Finally, an LLM-FCE-TOPSIS decision module integrates fuzzy comprehensive evaluation, tree-of-thought strategy generation, and dynamic ideal-solution ranking to support root-cause diagnosis, risk assessment, and intervention strategy optimization for explainable and high-validity public opinion governance in new energy vehicle enterprises.
+                              </p>
+                          </div>
+                      </div>
+
+                      <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                2026.06 - 至今
+              </span>
+                  </article>
+
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:file-text" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg max-w-2xl font-semibold text-white">【评审一轮中】期刊论文《 人智协同驱动的复杂网络舆情涌现机制及其生成式治理研究 》</p>
+                              <p class="mt-1 max-w-2xl text-sm font-medium text-[#24c781]">学生一作，人工智能&公共管理方向，公共管理学报期刊，公共管理领域重要学术期刊 + CSSCI收录 + 北大核心收录 + 复杂系统治理与数字治理前沿议题</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                                  平台化传播与生成式智能扩散正在推动网络舆情风险由内容失真问题加速演化为兼具认知操纵、规则反身性、信息级联与风险涌现特征的“能力型风险”，对当前我国乃至全球网络舆情治理产生新一轮挑战。本文在系统梳理AIGC情境下网络舆情风险演化与治理研究的基础上，以复杂适应系统理论为核心理论基础，综合协同治理、全过程治理与生成式治理等理念，构建由“技术—组织—制度”协同生态架构、“数据流—信息流—决策流—工作流”闭环运行机制和“风险特征—治理适配”能力建设逻辑组成的生成式治理框架。研究表明，能力型风险的治理重点已由末端内容处置转向前置识别、生成推演、协同处置与迭代优化相衔接的全过程能力建设，其关键在于通过制度规范、组织协同与技术赋能的持续耦合，实现网络舆情治理从事后控制向持续能力建设转变，并为我国网络舆情风险治理的制度重构与路径优化提供理论参照。
+                              </p>
+                          </div>
+                      </div>
+
+                      <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                2026.04 - 至今
+              </span>
+                  </article>
+
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:file-text" class="text-xl" />
+                          </div>
+                          <div>
                               <p class="text-lg max-w-2xl font-semibold text-white">【评审二轮中】会议论文《 MetaphorTree: Tree-Structured Hypothesis Search for Grounded Multimodal Metaphor Understanding 》</p>
                               <p class="mt-1 max-w-2xl text-sm font-medium text-[#24c781]">二作，人工智能&多模态方向，AAAI 会议，CCF-A + 人工智能领域国际会议 Top + 国际人工智能研究核心阵地 + 多模态理解与推理方向高度认可</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
@@ -266,7 +308,7 @@
                               <p class="text-lg max-w-2xl font-semibold text-white">【外审三轮中】期刊论文《 网络舆情风险的“生成式模拟干预”治理研究——基于AI智能体赋能视角 》</p>
                               <p class="mt-1 max-w-2xl text-sm font-medium text-[#24c781]">学生一作，人工智能&管理学方向，管理世界期刊，中国管理类 Premier + 中国国家智库核心阵地 + AMI Top + FMS Top + CSSCI收录 + 北大核心收录</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-                                  智能传播时代，企业网络舆情风险呈现生成主体多元、传播路径复杂、风险后果不确定等新特征，传统以监测预警和事后响应为主的治理方式，难以支撑企业在高不确定情境下开展前置研判、策略比较和协同决策。本文提出“生成式模拟—干预”（Generative Simulation–Intervention，GSI）治理模型，以复杂适应系统视角刻画企业舆情风险的非线性演化过程，并构建由一个GSI治理模型、三个治理层级和四类人智协同模式组成的“134”理论分析框架。GSI模型通过连接个体观点生成、微观特征评估、宏观态势提炼和企业决策模拟等核心模块，对不同治理策略可能引发的演化路径差异进行条件模拟与反事实比较，并将四类人智协同模式嵌入组织执行过程，形成从智能推演、人工校验到策略生成和责任承担的闭环治理机制。基于新能源车企舆情事件的实证检验表明，GSI模型能够支持长时序舆情推演与策略反事实比较，识别不同治理策略对信念、立场、情感等深层结构变量的调节作用，并结合“134”框架进一步推动推演结果向组织执行与人智协同决策转化。本文拓展了生成式治理与复杂系统治理在企业舆情风险管理场景中的解释边界，为建立常态化舆情压力测试、涌现阈值识别、分阶段策略组合和人智协同决策机制提供方法支撑。
+                                  智能传播时代，企业网络舆情风险呈现出生成主体多元化、传播结构复杂化与演化路径非线性增强的特征，传统基于事后监测与静态响应的治理模式难以支撑企业在高不确定环境下开展前瞻性研判与策略优化。针对上述问题，本文提出“生成式模拟—干预”（Generative Simulation–Intervention，GSI）治理框架。GSI框架构建了由风险感知、生成式推演与决策干预构成的三层智能体体系，并通过“表征—思考—行动—反馈”（RTAF）闭环机制实现多源舆情数据的结构化表达、微观行为模拟与宏观态势演化。在方法上，框架进一步引入反事实推演机制，在统一初始条件下对多种治理策略进行路径模拟与效果比较，使企业舆情回应从事后评估拓展为事前可计算实验。在此基础上，通过嵌入数据知识底座与人智协同机制，实现舆情风险识别、演化推演与策略优化的统一建模与持续学习。基于新能源汽车企业典型舆情事件的实证检验结果表明，GSI能够有效刻画长时序舆情风险演化过程，并显著区分不同治理策略在信念、立场与情绪结构上的影响差异，同时支持策略在反事实条件下的可比性评估。进一步地，人智协同机制验证了AI在风险识别与策略推演中的辅助作用，以及人类在价值判断与合规决策中的主导地位。本文拓展了生成式人工智能在企业风险治理领域的理论边界，将舆情治理从“静态识别—事后响应”推进至“动态模拟—策略实验”的生成式治理范式，为企业开展舆情压力测试、策略预演与人智协同决策提供了新的分析框架与方法支持。
                               </p>
                           </div>
                       </div>
@@ -287,7 +329,7 @@
                               <p class="text-lg max-w-2xl font-semibold text-white">【评审二轮中】期刊论文《 Early Fault Detection in Wind Turbines Using an Innovative Contrast-Based Mode 》</p>
                               <p class="mt-1 max-w-2xl text-sm font-medium text-[#24c781]">一作，人工智能&新能源方向，Wind Energy 期刊，风电细分领域权威 + SCI-E + Mechanical Engineering Q2 + 全球风电行业高度认可 + 理论与工程结合</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-
+                                  Large-scale wind turbines present significant mechanical complexity and are subject to environmental uncertainties, making traditional physical model-driven fault warning methods inadequate for the operational and maintenance needs of modern wind farms. To address this, we propose an innovative deep learning model, WeibullMirrorTVAE, for early fault detection in wind turbines. The model integrates a Weibull distribution mapping mechanism to transform discrete fault labels into continuous accumulation signals, enhancing temporal dynamics capture. It employs mirror-structured time-series variational autoencoders with attention mechanisms for reconstructing normal and abnormal samples separately, and a mirror adaptive feature threshold setting mechanism for precise anomaly detection. Experiments on the 'CARE to Compare' dataset demonstrate superior performance, achieving a CARE-score of 0.681 and Earliness of 0.407, highlighting model’s ability to balance accurate early detection with fewer false alarm.
                               </p>
                           </div>
                       </div>
@@ -381,7 +423,7 @@
                               <p class="text-lg font-semibold text-white">CAMCM 认证杯数学建模国际赛</p>
                               <p class="mt-1 text-sm font-medium text-[#24c781]">Finalist (F奖)，特等奖提名</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-
+                                  Classification and segmentation of product surface defects based on Lite DS-MobileNet
                               </p>
                           </div>
                       </div>
@@ -444,6 +486,162 @@
 
               <div class="space-y-4">
 
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:code-xml" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg font-semibold text-white">【待开始】【Web全栈开发】基于持续学习的科研团队生产力促进 AI 系统</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">待定</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="flex shrink-0 flex-col items-start gap-2 md:items-end">
+                        <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          预计 2026.08 开始
+                        </span>
+                          <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          <Icon icon="lucide:map-pin" class="text-sm" />
+                          新加坡
+                        </span>
+                      </div>
+                  </article>
+
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:code-xml" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg font-semibold text-white">【开发中】【Web全栈开发】全栈上下文编排器</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">自研</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="flex shrink-0 flex-col items-start gap-2 md:items-end">
+                        <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          2026.07 - 至今
+                        </span>
+                          <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          <Icon icon="lucide:map-pin" class="text-sm" />
+                          新加坡
+                        </span>
+                      </div>
+                  </article>
+
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:code-xml" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg font-semibold text-white">【开发中】【Web全栈开发】小红书 AI 全流程自动化自媒体运营系统</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">待定</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="flex shrink-0 flex-col items-start gap-2 md:items-end">
+                        <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          2026.06 - 至今
+                        </span>
+                          <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          <Icon icon="lucide:map-pin" class="text-sm" />
+                          浙江杭州
+                        </span>
+                      </div>
+                  </article>
+
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:code-xml" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg font-semibold text-white">【开发中】【Web全栈开发】AI 金融分析系统</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">自研</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="flex shrink-0 flex-col items-start gap-2 md:items-end">
+                        <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          2026.05 - 至今
+                        </span>
+                          <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          <Icon icon="lucide:map-pin" class="text-sm" />
+                          新加坡
+                        </span>
+                      </div>
+                  </article>
+
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:code-xml" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg font-semibold text-white">【论文实验】百万级论文 LLM 专家定位评估实验程序</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">中国科学院大学</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                                  面向已识别为使用 AI 的科研论文摘要，构建“研究环节识别、AI 功能识别、方法学定位与必要性强度评分”四维判定框架，用于判断 AI 在具体研究中的重要程度：是常规辅助工具、核心分析方法，还是传统方法难以替代的知识生产机制；设计提示词模板、结构化输出规范与批量后处理机制，支持百万级摘要的定位评估、证据归因和结果统计，显著加快了并批量进行的 LLM 总体推理速度，并显著降低了总体 LLM 调用成本
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="flex shrink-0 flex-col items-start gap-2 md:items-end">
+                        <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          2026.05 - 2026.06
+                        </span>
+                        <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          <Icon icon="lucide:map-pin" class="text-sm" />
+                          北京
+                        </span>
+                      </div>
+                  </article>
+
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:code-xml" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg font-semibold text-white">【开发中】【Web全栈开发】国际媒体舆情AI采集分析系统</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">浙江工业大学区域国别研究院</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="flex shrink-0 flex-col items-start gap-2 md:items-end">
+                        <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          2026.04 - 至今
+                        </span>
+                          <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          <Icon icon="lucide:map-pin" class="text-sm" />
+                          浙江杭州
+                        </span>
+                      </div>
+                  </article>
 
                   <article
                       class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
@@ -456,7 +654,7 @@
                               <p class="text-lg font-semibold text-white">【技术顾问】医院病历文本挖掘和病历质量监控模型</p>
                               <p class="mt-1 text-sm font-medium text-[#24c781]">浙江省人民医院</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-                                  基于 LLM 专家经验构建高质量小样本标准库，并结合既有 CNN 识别神经网络对训练流程与特征表达进行改进，有效缓解病历标注数据不足带来的模型训练瓶颈，提升了病历文本识别准确率与 F1 表现，支撑病历质量监控与文本挖掘任务落地。
+                                  基于 LLM 专家经验构建高质量小样本标准库，并结合既有 CNN 识别神经网络对训练流程与特征表达进行改进，有效缓解病历标注数据不足带来的模型训练瓶颈，提升了病历文本识别准确率与 F1 表现，支撑病历质量监控与文本挖掘任务落地
                               </p>
                           </div>
                       </div>
@@ -472,6 +670,32 @@
                       </div>
                   </article>
 
+                  <article
+                      class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
+                  >
+                      <div class="flex gap-4">
+                          <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#325a47] bg-[#193025] text-[#24c781]">
+                              <Icon icon="lucide:code-xml" class="text-xl" />
+                          </div>
+                          <div>
+                              <p class="text-lg font-semibold text-white">【论文实验】百万级论文 AI 暴露度计算与科研方法替代潜力测算程序</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">中国科学院大学</p>
+                              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
+                                  面向能源转型与气候变化领域的全量相关论文，构建“LLM 语义判别 + 向量检索匹配 + 技术成熟度约束加权”的三阶段 AI 暴露度测算框架，用于评估即使当前研究尚未使用 AI，其科研流程在 AI 原生方法、成熟 AI 技术库与历史方法库支持下被重构或替代的潜力；由于三阶段逻辑彼此依赖，采用先综述剔除、再主题筛选、再科研流程阶段映射的分阶段串联处理，并进一步完成 AI 使用度、不可替代性与暴露度计算及分块持久化输出，以支撑百万级论文规模的高效运行，同时显著加快 LLM 总体推理速度并降低调用成本
+                              </p>
+                          </div>
+                      </div>
+
+                      <div class="flex shrink-0 flex-col items-start gap-2 md:items-end">
+                        <span class="w-fit rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          2025.08 - 2026.07
+                        </span>
+                          <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                          <Icon icon="lucide:map-pin" class="text-sm" />
+                          北京
+                        </span>
+                      </div>
+                  </article>
 
                   <article
                       class="flex flex-col gap-4 rounded-2xl border border-[#2f2f2f] bg-[#202020] p-5 md:flex-row md:items-start md:justify-between"
@@ -537,7 +761,7 @@
                               <Icon icon="lucide:code-xml" class="text-xl" />
                           </div>
                           <div>
-                              <p class="text-lg font-semibold text-white">【Web全栈开发】基于LLM的自动化论文知识网络构建平台全栈程序</p>
+                              <p class="text-lg font-semibold text-white">【Web全栈开发】基于 LLM 的自动化论文知识网络构建平台全栈程序</p>
                               <p class="mt-1 text-sm font-medium text-[#24c781]">浙江工业大学图书馆</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
                                   应用大语言模型，实现根据多检索词自动化构建论文-主题短语的知识网络并生成多角度文献综述，快速呈现某领域研究现状
@@ -565,7 +789,7 @@
                               <Icon icon="lucide:code-xml" class="text-xl" />
                           </div>
                           <div>
-                              <p class="text-lg font-semibold text-white">【技术顾问】服装设计草图生成AIGC程序</p>
+                              <p class="text-lg font-semibold text-white">【技术顾问】服装设计草图生成 AIGC 程序</p>
                               <p class="mt-1 text-sm font-medium text-[#24c781]">南郊韫典服装厂</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
                                   为企业的运动女装服饰设计草图AI生成模型提供技术框架，搭建企业服饰草图数据库，助力提高服装设计师的效率和工厂的数字化转型
@@ -593,10 +817,10 @@
                               <Icon icon="lucide:code-xml" class="text-xl" />
                           </div>
                           <div>
-                              <p class="text-lg font-semibold text-white">【技术顾问】AI投标文件辅助写作LLM程序</p>
+                              <p class="text-lg font-semibold text-white">【技术顾问】智能投标文件辅助写作 LLM 程序</p>
                               <p class="mt-1 text-sm font-medium text-[#24c781]">温州微极光智能科技有限公司</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-                                  设计结合企业多部门资料库的AI投标文件辅助写作LLM程序的技术框架，提高投标文件书写规范
+                                  设计结合企业多部门资料库的智能投标文件辅助写作LLM程序的技术框架，提高投标文件书写规范
                               </p>
                           </div>
                       </div>
@@ -652,7 +876,7 @@
                               <p class="text-lg font-semibold text-white">【Web全栈开发】知识管理互联应用平台全栈程序</p>
                               <p class="mt-1 text-sm font-medium text-[#24c781]">綦方中教授科研团队</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-                                  设计开发支持PDF、Markdown和知识图谱文件互联功能整合的全栈平台，同时开发了支持自由编辑图谱结构的前端组件，实现了团队文件管理、图谱编辑、Markdown文件编辑、PDF预览等功能整合
+                                  设计开发支持 PDF、Markdown 和知识图谱文件互联功能整合的全栈平台，同时开发了支持自由编辑图谱结构的前端组件，实现了团队文件管理、图谱编辑、Markdown 文件编辑、PDF 预览等功能整合
                               </p>
                           </div>
                       </div>
@@ -677,8 +901,8 @@
                               <Icon icon="lucide:code-xml" class="text-xl" />
                           </div>
                           <div>
-                              <p class="text-lg font-semibold text-white">【技术文档撰写】LLM双层嵌套支撑电力物资管理智能化技术研究</p>
-                              <p class="mt-1 text-sm font-medium text-[#24c781]">国网浙江省电力有限公司</p>
+                              <p class="text-lg font-semibold text-white">【技术文档撰写】LLM 双层嵌套支撑电力物资管理智能化技术研究</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">国家电网浙江省电力有限公司</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
                                   为团队项目规划提供核心研究思路：基于大语言模型双层嵌套框架的二次学习方法、电力物料族谱生成方法、需求知识网络生成方法、场景化应用路径生成方法研究等技术方法
                               </p>
@@ -708,7 +932,7 @@
                               <p class="text-lg font-semibold text-white">【模型设计】高光谱油液多元素预测模型</p>
                               <p class="mt-1 text-sm font-medium text-[#24c781]">联桥网云信息科技有限公司</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-                                  为手持检测设备提供核心预测算法，提出基于可学习参数小波变换的BiScaleWaveNet双流异构神经网络模型，通过将低频趋势与高频瞬态数据特征解耦，实现风机齿轮箱中油液的高光谱多元素定量预测
+                                  为手持检测设备提供核心预测算法，提出基于可学习参数小波变换的 BiScaleWaveNet 双流异构神经网络模型，通过将低频趋势与高频瞬态数据特征解耦，实现风机齿轮箱中油液的高光谱多元素定量预测
                               </p>
                           </div>
                       </div>
@@ -734,9 +958,9 @@
                           </div>
                           <div>
                               <p class="text-lg font-semibold text-white">【Web后端开发】项目计划智能度量后端</p>
-                              <p class="mt-1 text-sm font-medium text-[#24c781]">国网浙江省电力有限公司</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">国家电网浙江省电力有限公司</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
-                                  主导项目二期重构与开发，个人完成核心模块改进与新需求实现，实现了Excel项目估算书智能解析、Word项目可研文本智能解析、语料库搭建、Excel因子公式动态公式配置等功能
+                                  主导项目二期重构与开发，个人完成核心模块改进与新需求实现，实现了 Excel 项目估算书智能解析、Word 项目可研文本智能解析、语料库搭建、Excel 因子公式动态公式配置等功能
                               </p>
                           </div>
                       </div>
@@ -762,7 +986,7 @@
                           </div>
                           <div>
                               <p class="text-lg font-semibold text-white">【Web后端开发】科技资源检索引擎后端</p>
-                              <p class="mt-1 text-sm font-medium text-[#24c781]">国网浙江省电力有限公司</p>
+                              <p class="mt-1 text-sm font-medium text-[#24c781]">国家电网浙江省电力有限公司</p>
                               <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#8f8f8f]">
                                   主导项目全生命周期开发，基于图数据库构建企业级异构知识图谱，实现了关系型和图结构数据双重智能检索、异构图数据重构、关键热词排序、专业词语义总结等功能
                               </p>
@@ -899,7 +1123,7 @@
                       <thead class="bg-[#1b1b1b]">
                       <tr>
                           <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9ae9c4]">时间</th>
-                          <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9ae9c4]">地点/机构</th>
+                          <th class="w-56 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9ae9c4]">地点/机构</th>
                           <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9ae9c4]">项目/活动内容</th>
                           <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9ae9c4]">角色/技术方向</th>
                       </tr>
@@ -911,7 +1135,7 @@
                         class="bg-[#202020] even:bg-[#252525]"
                       >
                           <td class="whitespace-nowrap px-4 py-3 text-sm text-[#d4d4d4]">{{ item.time }}</td>
-                          <td class="whitespace-nowrap px-4 py-3 text-sm text-[#d4d4d4]">{{ item.location }}</td>
+                          <td class="w-56 max-w-56 break-words px-4 py-3 text-sm leading-relaxed text-[#d4d4d4]">{{ item.location }}</td>
                           <td class="px-4 py-3 text-sm text-[#d4d4d4]">{{ item.project }}</td>
                           <td class="px-4 py-3 text-sm text-[#d4d4d4]">{{ item.direction }}</td>
                       </tr>
@@ -1016,16 +1240,16 @@ const featuredSeminarData: FeaturedSeminarItem[] = [
         title: 'Artificial Intelligence and Operations Management 分会场',
         audience: '面向博士生、高校教师等学术受众',
         role: '台上学术分享演讲与现场答疑',
-        value: '在国际学术会议场景中完成公开表达，展示 AI 与运营管理交叉研究理解、议题组织能力和问答应对能力。',
+        value: '在国际学术会议场景中完成公开表达，具备 AI 与运营管理交叉研究理解、议题组织能力和问答应对能力',
         icon: 'lucide:presentation'
     },
     {
         time: '2025.06',
-        location: '浙江工业大学 MBA 企业高管课堂',
+        location: '浙江工业大学管理学院 MBA 企业高管课堂',
         title: 'AI技术落地方案',
         audience: '面向企业高级管理人员',
         role: '台上技术方案分享与现场答疑',
-        value: '将 AI 技术能力转译为企业管理者可理解的落地方案，体现跨技术、业务与管理语境的表达和沟通能力。',
+        value: '将 AI 技术能力转译为企业管理者可理解的落地方案，具备跨技术、业务与管理语境的表达和沟通能力',
         icon: 'lucide:graduation-cap'
     },
 ];
@@ -1057,7 +1281,7 @@ const seminarData: SeminarItem[] = [
     },
     {
         time: '2025.06',
-        location: '浙江工业大学MBA企业高管课堂',
+        location: '浙江工业大学管理学院MBA企业高管课堂',
         project: 'AI技术落地方案',
         direction: '台上分享技术方案和答疑（高级管理人员课程）'
     },
@@ -1130,7 +1354,7 @@ const seminarData: SeminarItem[] = [
     {
         time: '2025.02',
         location: '温州·微极光智能科技有限公司',
-        project: 'AI投标文件辅助写作LLM程序技术探讨',
+        project: '智能投标文件辅助写作LLM程序技术探讨',
         direction: '技术方案探讨（自己主导）'
     },
     {
@@ -1160,7 +1384,7 @@ const seminarData: SeminarItem[] = [
     {
         time: '2023.12',
         location: 'CAMCM认证杯数学建模国际赛',
-        project: '基于动态蛇形卷积的MobileNet模型改进',
+        project: '基于动态蛇形卷积的MobileNet模型改进（Classification and segmentation of product surface defects based on Lite DS-MobileNet）',
         direction: '团队技术负责（计算机视觉模型优化）'
     },
     {
