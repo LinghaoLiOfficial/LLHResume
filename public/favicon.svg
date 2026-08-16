@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Linghao Li Resume</title>
+  <desc id="desc">Centered neon L monogram favicon for Linghao Li's resume.</desc>
+  <defs>
+    <linearGradient id="bg" x1="8" y1="6" x2="58" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827" />
+      <stop offset="0.48" stop-color="#1e1b4b" />
+      <stop offset="1" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="mark" x1="16" y1="12" x2="51" y2="53" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67e8f9" />
+      <stop offset="0.48" stop-color="#a78bfa" />
+      <stop offset="1" stop-color="#f472b6" />
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.4" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.42 0 0 0 0 0.91 0 0 0 0 1 0 0 0 0.75 0" result="cyanGlow" />
+      <feMerge>
+        <feMergeNode in="cyanGlow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)" />
+  <path d="M23 12h9v31h19v9H23V12Z" fill="url(#mark)" filter="url(#glow)" />
+</svg>
