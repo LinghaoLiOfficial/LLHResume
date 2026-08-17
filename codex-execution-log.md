@@ -259,6 +259,20 @@
 
 ## 2026-08-17 01:03 +08 - 恢复光斑与 Resume 背景层
 
+## 2026-08-17 01:09 +08 - 新增未来发展模块
+
+- Request: 用户要求在教育背景前增加一个“未来发展”模块，包含读博方向和创业方向。
+- Actions: 修改 `src/views/resume/Resume.vue`，在教育背景前新增“未来发展”分区，使用两张卡片分别呈现读博意向与创业意向；随后运行构建验证。
+- Result: 简历现在在教育背景前展示“未来发展”模块，读博方向覆盖新加坡、香港、上海和浙江，创业方向强调依托高校资源。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-17 01:15 +08 - 放宽未来发展文本宽度
+
+- Request: 用户要求增大“未来发展”模块的文本描述宽度。
+- Actions: 修改 `src/views/resume/Resume.vue`，将“未来发展”模块两段说明的宽度约束从 `max-w-2xl` 放宽为 `max-w-3xl`，并重新构建验证。
+- Result: “未来发展”模块的文字现在占用更宽的行宽，视觉上更舒展。
+- Verification: 已运行 `npm run build`，构建通过。
+
 - Request: 用户要求保留原有背景中的绿色光斑和绿色 `Resume` 文字，并将它们放到数字雨后面。
 - Actions: 修改 `src/views/resume/Resume.vue`，将数字雨 canvas 提升为 `z-[1]`，原光斑和竖排 `Resume` 背景层保持 `z-0`，并恢复光斑为原先的绿色透明度强度。
 - Result: 页面背景层级变为原光斑/`Resume` 在底层、数字雨在中层、简历主体内容在 `z-10` 顶层。
@@ -277,3 +291,25 @@
 - Actions: 修改 `src/views/resume/Resume.vue`，为每个 Matrix 列增加 `trailLength` 和字符缓存，每帧透明清空后即时绘制 5-9 个逐渐变淡的数字短串，而不是依赖旧帧残影。
 - Result: 数字雨恢复连续短串下落效果，同时不会留下持久浅绿色印记，也不会遮挡底层光斑和 `Resume`。
 - Verification: 已运行 `npm run build`，构建通过；已用应用浏览器检查 `http://localhost:8080/`，确认固定透明 canvas、底层装饰和短串数字雨同时存在，并保存预览截图到 `/tmp/codex-resume-matrix-check/resume-matrix-trail-restored.jpg`。
+
+## 2026-08-17 01:30 +08 - 评估网站上线与自定义域名方案
+
+- Request: 用户要求评估如何将当前前端项目上线，让中国大陆和全球用户访问，并确认域名能否自定义。
+- Actions: 检查项目结构、`package.json`、Vite 配置、Git 远程仓库与 `dist/` 产物；运行 `npm run build`；结合静态托管平台文档和中国大陆备案要求评估部署路径。
+- Result: 确认项目是 Vue 3 + Vite 纯静态站点，可直接发布 `dist/`；自定义域名可行。海外静态托管适合快速全球上线；若要求大陆长期稳定访问，应考虑中国大陆云厂商静态托管/CDN及备案，或采用大陆/海外双站点。
+- Verification: `npm run build` 通过，生成 `dist/index.html`、CSS、JS、头像和 favicon 资源。
+- Follow-ups: 选择托管平台和域名后，可继续配置 GitHub Actions 自动部署、DNS、HTTPS 与大陆/海外访问验证。
+
+## 2026-08-17 12:43 +08 - 写入生成式 AI 多风险感知框架项目
+
+- Request: 用户要求根据附件内容，将 `【新加坡】【开发中】【2026.07 - 至今】` 的项目写入“项目&研究经验”。
+- Actions: 从附件 docx 中提取研究框架正文，区分附件内容与用户指令；修改 `src/views/resume/Resume.vue`，在“项目&研究经验”中新增 `【开发中】【生成式AI风险感知】面向职业社群的动态多风险感知框架` 项目卡片，并更新项目技术文档。
+- Result: 新卡片位于 2026.07 条目位置，机构为 `自研`，地点为 `新加坡`，描述涵盖语义事件切分、动态风险本体、多风险校准、风险演化预警与人机协同闭环。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-17 13:45 +08 - 增加简历双语路径切换
+
+- Request: 用户要求 `/en` 显示完整英文简历，而 `/` 和 `/cn` 继续显示当前版本，且当前版本中的英文文本保持不变。
+- Actions: 修改 `src/views/resume/Resume.vue`，为根节点加入路径识别与英文翻译层，使用英文翻译字典在 `/en` 渲染后替换文本节点；保留现有布局、动画、头像与 Vite 配置不变，并更新项目技术文档。
+- Result: `/` 与 `/cn` 继续显示中文当前版，`/en` 显示完整英文版，页面中无中文字段残留；现有英文技术表述在两个版本中保持原样或经翻译后的英文表达。
+- Verification: 已运行 `npm run build`，构建通过；并用本地浏览器验证 `/`、`/cn`、`/en` 的 DOM 文本差异。
