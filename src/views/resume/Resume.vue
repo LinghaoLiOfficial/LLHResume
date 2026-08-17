@@ -32,8 +32,8 @@
 
             <div>
               <div class="flex flex-col items-center space-y-2 pt-8">
-                  <h1 class="text-3xl font-semibold text-white">李凌浩</h1>
-                  <h2 class="text-2xl font-semibold text-[#c8c8c8]">Linghao Li (Lion)</h2>
+                  <h1 class="text-3xl font-semibold text-white">{{ activeLocale === 'en' ? 'Linghao Li (Lion)' : '李凌浩' }}</h1>
+                  <h2 v-if="activeLocale !== 'en'" class="text-2xl font-semibold text-[#c8c8c8]">Linghao Li (Lion)</h2>
               </div>
 
                 <div class="flex flex-col space-y-4 mt-8 ml-10">
