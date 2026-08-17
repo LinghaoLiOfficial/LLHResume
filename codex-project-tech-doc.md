@@ -11,6 +11,7 @@
 - `src/App.vue` 是应用根组件。
 - `src/views/resume/Resume.vue` 承载主要简历页面视图。
 - `src/views/resume/Resume.vue` 通过 `window.location.pathname` 识别语言路径；在 `/en` 下会在首轮渲染后遍历文本节点并用英文翻译字典替换页面文案，未引入 Vue Router。
+- `vercel.json` 为 Vercel 静态部署配置 SPA fallback，将所有路径 rewrite 到 `/index.html`，避免直接访问 `/cn`、`/en` 时由平台按真实文件查找而返回 `404: NOT_FOUND`。
 - `src/views/resume/Resume.vue` 内置 Matrix 风格绿色随机数字雨背景；原绿色光斑和竖排 `Resume` 文字使用 `fixed inset-0 z-0` 底层，canvas 使用 `fixed inset-0 h-screen w-screen`、`z-[1]` 与 `pointer-events-none`，主体内容保持 `relative z-10`。
 - 数字雨动画使用 `requestAnimationFrame`，canvas 每帧通过 `clearRect` 透明清空后为每列即时绘制 5-9 个逐渐变淡的数字短串，只绘制当前 viewport 尺寸，DPR 上限为 `1.5`，不再依赖旧帧残影、文字阴影或深色覆盖层，并通过 `prefers-reduced-motion` 在减少动态效果时切换为淡绿色静态纹理。
 - 简历头部姓名区域采用中文名在上、英文名与昵称 `Linghao Li (Lion)` 在下的垂直展示。
@@ -38,6 +39,7 @@
 - `public/favicon.svg`: 网页标签图标，当前为单个居中 `L`。
 - `public/avatar.jpg`: 简历页面头像资源。
 - `vite.config.ts`: Vite 配置。
+- `vercel.json`: Vercel rewrite 配置，用于支持前端路径直连。
 - `package.json`: 项目脚本与依赖声明。
 
 ## Setup and Runbook
@@ -46,7 +48,7 @@
 - 本地开发: `npm run dev`，默认服务地址为 `http://localhost:8080/`
 - 生产构建: `npm run build`
 - 本地预览构建产物: `npm run preview`
-- 上线形态: 纯静态站点，部署时发布 `dist/` 目录；当前不需要 Node.js 常驻进程、数据库或后端 API。
+- 上线形态: 纯静态站点，部署时发布 `dist/` 目录；当前不需要 Node.js 常驻进程、数据库或后端 API。Vercel 部署需保留项目根目录的 `vercel.json`，让 `/cn`、`/en` 等前端路径回退到 `index.html`。
 - 推荐上线顺序: 先使用 Cloudflare Pages、Vercel 或 GitHub Pages 之一绑定自定义域名快速发布；若中国大陆访问是硬性要求，再迁移到中国大陆云厂商的 OSS/COS 静态托管与 CDN，并按服务商要求完成 ICP 备案。
 
 ## Testing and Verification

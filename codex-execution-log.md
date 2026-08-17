@@ -313,3 +313,10 @@
 - Actions: 修改 `src/views/resume/Resume.vue`，为根节点加入路径识别与英文翻译层，使用英文翻译字典在 `/en` 渲染后替换文本节点；保留现有布局、动画、头像与 Vite 配置不变，并更新项目技术文档。
 - Result: `/` 与 `/cn` 继续显示中文当前版，`/en` 显示完整英文版，页面中无中文字段残留；现有英文技术表述在两个版本中保持原样或经翻译后的英文表达。
 - Verification: 已运行 `npm run build`，构建通过；并用本地浏览器验证 `/`、`/cn`、`/en` 的 DOM 文本差异。
+
+## 2026-08-17 14:15 +08 - 修复 Vercel 子路径 404
+
+- Request: 用户反馈推送到 GitHub 并在 Vercel 部署后，`/cn` 和 `/en` 直接访问显示 `404: NOT_FOUND`。
+- Actions: 新增 `vercel.json`，配置所有路径 rewrite 到 `/index.html`，让 Vercel 静态部署将 `/cn`、`/en` 交给前端页面处理；运行构建并创建本地提交 `9ad1383 Add Vercel SPA rewrite`。
+- Result: 本地已具备 Vercel SPA fallback 配置，理论上重新部署后子路径直连不再 404。
+- Verification: 已运行 `npm run build`，构建通过；`git push origin main` 因当前环境缺少 GitHub HTTPS 凭据和 SSH 公钥未完成，当前 `main` 比 `origin/main` ahead 1。
