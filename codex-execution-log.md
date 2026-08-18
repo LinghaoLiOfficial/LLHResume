@@ -369,3 +369,10 @@
 - Actions: 修改 `src/views/resume/Resume.vue`，将可展开状态提升到包含被截断段落的 `article` 条目上，点击事件和键盘事件改为切换整张条目内所有可展开段落；修改 `src/style.css`，将指针和焦点样式从段落移到可展开条目卡片。
 - Result: 移动端只要条目内存在被省略号截断的段落，点击该条目任意位置即可展开或收起。
 - Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:05 +08 - 优化移动端展开交互性能
+
+- Request: 用户反馈修改后移动端滚动严重卡顿，内容需要很长时间才加载出来。
+- Actions: 修改 `src/views/resume/Resume.vue`，移除移动端长文本全页 `scrollHeight/clientHeight` 截断检测、定时刷新和 resize 后重新测量逻辑，改为点击时按需查找当前条目内长段落并切换 `article.is-expanded`；修改 `src/style.css`，移除可能加重长页面样式计算的 `:has(...)` 选择器。
+- Result: 移动端不再在首轮渲染或 resize 时批量测量大量段落布局，滚动和内容出现应更轻；整条目点击展开功能保留。
+- Verification: 已运行 `npm run build`，构建通过。

@@ -1444,101 +1444,25 @@ const handleReducedMotionChange = () => {
 const handleMatrixResize = () => {
   sizeMatrixCanvas();
   startMatrixRain();
-  scheduleExpandableTextRefresh();
 };
-
-let expandableTextRefreshTimer = 0;
 
 const isMobileViewport = () => window.matchMedia('(max-width: 640px)').matches;
 
 const expandableTextSelector = 'section article p[class*="leading-relaxed"]';
-
-const resetExpandableText = (element: HTMLElement) => {
-  element.classList.remove('mobile-expandable', 'is-expanded');
-};
-
-const resetExpandableArticle = (element: HTMLElement) => {
-  element.classList.remove('mobile-expandable-item');
-  element.removeAttribute('role');
-  element.removeAttribute('tabindex');
-  element.removeAttribute('aria-expanded');
-};
-
-const refreshExpandableText = () => {
-  const root = resumeRoot.value;
-
-  if (!root) {
-    return;
-  }
-
-  const paragraphs = Array.from(root.querySelectorAll<HTMLElement>(expandableTextSelector));
-  const expandableArticles = new Set<HTMLElement>();
-
-  root.querySelectorAll<HTMLElement>('.mobile-expandable-item').forEach(resetExpandableArticle);
-
-  paragraphs.forEach((paragraph) => {
-    if (!paragraph.textContent?.trim() || !isMobileViewport()) {
-      resetExpandableText(paragraph);
-      return;
-    }
-
-    const wasExpanded = paragraph.classList.contains('is-expanded');
-    paragraph.classList.remove('is-expanded');
-
-    const isClamped = paragraph.scrollHeight > paragraph.clientHeight + 2;
-
-    if (!isClamped) {
-      resetExpandableText(paragraph);
-      return;
-    }
-
-    paragraph.classList.add('mobile-expandable');
-    const article = paragraph.closest<HTMLElement>('article');
-
-    if (article) {
-      expandableArticles.add(article);
-    }
-
-    if (wasExpanded) {
-      paragraph.classList.add('is-expanded');
-    }
-  });
-
-  expandableArticles.forEach((article) => {
-    const isExpanded = article.querySelector('.mobile-expandable.is-expanded') !== null;
-
-    article.classList.add('mobile-expandable-item');
-    article.setAttribute('role', 'button');
-    article.setAttribute('tabindex', '0');
-    article.setAttribute('aria-expanded', String(isExpanded));
-  });
-};
-
-const scheduleExpandableTextRefresh = () => {
-  window.clearTimeout(expandableTextRefreshTimer);
-  expandableTextRefreshTimer = window.setTimeout(refreshExpandableText, 80);
-};
 
 const toggleExpandableArticle = (element: HTMLElement) => {
   if (!isMobileViewport()) {
     return;
   }
 
-  const paragraphs = Array.from(element.querySelectorAll<HTMLElement>('.mobile-expandable'));
-  const isExpanded = !paragraphs.every((paragraph) => paragraph.classList.contains('is-expanded'));
-
-  paragraphs.forEach((paragraph) => {
-    paragraph.classList.toggle('is-expanded', isExpanded);
-  });
-
-  element.setAttribute('aria-expanded', String(isExpanded));
+  element.classList.toggle('is-expanded');
 };
 
 const handleExpandableTextClick = (event: MouseEvent) => {
   const target = event.target as Element | null;
-  const expandableArticle = target?.closest<HTMLElement>('.mobile-expandable-item');
+  const expandableArticle = target?.closest<HTMLElement>('article');
 
-  if (!expandableArticle || !resumeRoot.value?.contains(expandableArticle)) {
+  if (!expandableArticle || !resumeRoot.value?.contains(expandableArticle) || !expandableArticle.querySelector(expandableTextSelector)) {
     return;
   }
 
@@ -1551,13 +1475,14 @@ const handleExpandableTextKeydown = (event: KeyboardEvent) => {
   }
 
   const target = event.target as HTMLElement | null;
+  const expandableArticle = target?.closest<HTMLElement>('article');
 
-  if (!target?.classList.contains('mobile-expandable-item')) {
+  if (!expandableArticle || !resumeRoot.value?.contains(expandableArticle) || !expandableArticle.querySelector(expandableTextSelector)) {
     return;
   }
 
   event.preventDefault();
-  toggleExpandableArticle(target);
+  toggleExpandableArticle(expandableArticle);
 };
 
 const englishCopy: Record<string, string> = {
@@ -1875,7 +1800,6 @@ const translateResumeCopy = async () => {
   }
 
   document.documentElement.lang = 'en';
-  scheduleExpandableTextRefresh();
 };
 
 onMounted(() => {
@@ -1883,7 +1807,6 @@ onMounted(() => {
   sizeMatrixCanvas();
   startMatrixRain();
   void translateResumeCopy();
-  scheduleExpandableTextRefresh();
 
   window.addEventListener('resize', handleMatrixResize);
   window.visualViewport?.addEventListener('resize', handleMatrixResize);
@@ -1893,7 +1816,6 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  window.clearTimeout(expandableTextRefreshTimer);
   window.cancelAnimationFrame(matrixAnimationFrame);
   window.removeEventListener('resize', handleMatrixResize);
   window.visualViewport?.removeEventListener('resize', handleMatrixResize);
