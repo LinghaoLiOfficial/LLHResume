@@ -2,7 +2,7 @@
   <section
     ref="resumeRoot"
     :lang="activeLocale"
-    class="relative min-h-screen overflow-hidden bg-[#121212] px-6 py-12 font-['Inter','Roboto','sans-serif'] text-white md:px-10"
+    class="resume-page relative min-h-screen overflow-hidden bg-[#121212] px-6 py-12 font-['Inter','Roboto','sans-serif'] text-white md:px-10"
   >
     <canvas
       ref="matrixCanvas"
@@ -10,7 +10,7 @@
       class="pointer-events-none fixed inset-0 z-[1] h-screen w-screen opacity-90"
     />
 
-    <div class="pointer-events-none fixed inset-0 z-0">
+    <div class="resume-bg pointer-events-none fixed inset-0 z-0">
       <div class="absolute left-[12%] top-16 h-72 w-72 rounded-full bg-[#24c781]/25 blur-[120px]" />
       <div class="absolute bottom-20 right-[14%] h-80 w-80 rounded-full bg-[#24c781]/20 blur-[140px]" />
       <p
@@ -20,10 +20,10 @@
       </p>
     </div>
 
-    <div class="relative z-10 mx-auto flex min-h-[80vh] w-full max-w-6xl items-center justify-center">
-      <article class="w-full rounded-3xl border border-[#333333] bg-[#1a1a1a]/95 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm md:p-10">
-        <header class="grid gap-8 border-b border-[#2b2b2b] pb-10 lg:grid-cols-[320px_1fr]">
-          <div class="space-y-6 flex flex-col items-center">
+    <div class="resume-shell relative z-10 mx-auto flex min-h-[80vh] w-full max-w-6xl items-center justify-center">
+      <article class="resume-card w-full rounded-3xl border border-[#333333] bg-[#1a1a1a]/95 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm md:p-10">
+        <header class="resume-header grid gap-8 border-b border-[#2b2b2b] pb-10 lg:grid-cols-[320px_1fr]">
+          <div class="resume-profile space-y-6 flex flex-col items-center">
             <img
               :src="avatarSrc"
               alt="Lion Lee"
@@ -31,19 +31,19 @@
             >
 
             <div>
-              <div class="flex flex-col items-center space-y-2 pt-8">
+              <div class="resume-name flex flex-col items-center space-y-2 pt-8">
                   <h1 class="text-3xl font-semibold text-white">{{ activeLocale === 'en' ? 'Linghao Li (Lion)' : '李凌浩' }}</h1>
                   <h2 v-if="activeLocale !== 'en'" class="text-2xl font-semibold text-[#c8c8c8]">Linghao Li (Lion)</h2>
               </div>
 
-                <div class="flex flex-col space-y-4 mt-8 ml-10">
+                <div class="resume-contact flex flex-col space-y-4 mt-8 ml-10">
                     <div class="flex flex-row space-x-2 items-center">
                         <div class="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-[#202020] transition border-[#24c781] text-[#24c781]">
                             <Icon icon="ic:round-email" class="text-base" />
                         </div>
                         <div class="flex flex-col space-y-1">
                             <span class="text-[#24c781]">邮箱</span>
-                            <span class="text-sm">linghao.li.2002@gmail.com</span>
+                            <span class="break-all text-sm">linghao.li.2002@gmail.com</span>
                         </div>
                     </div>
                     <div class="flex flex-row space-x-2 items-center">
@@ -91,7 +91,7 @@
 <!--            </div>-->
           </div>
 
-          <div class="flex h-full flex-col justify-center space-y-6 pl-12">
+          <div class="resume-intro flex h-full flex-col justify-center space-y-6 pl-12">
 
             <div>
                 <div class="inline-flex items-center gap-2 rounded-full border border-[#2c664a] bg-[#1a2a22] px-3 py-1 text-sm text-[#9ae9c4]">
@@ -1196,7 +1196,26 @@
                   </article>
               </div>
 
-              <div class="overflow-x-auto rounded-2xl border border-[#2f2f2f] bg-[#202020]">
+              <div class="space-y-3 md:hidden">
+                  <article
+                    v-for="item in seminarData"
+                    :key="`mobile-${item.time}-${item.location}-${item.project}`"
+                    class="rounded-2xl border border-[#2f2f2f] bg-[#202020] p-4"
+                  >
+                      <div class="flex flex-wrap gap-2">
+                          <span class="rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                              {{ item.time }}
+                          </span>
+                          <span class="rounded-full border border-[#34674f] bg-[#1c3026] px-3 py-1 text-xs font-medium text-[#9ae9c4]">
+                              {{ item.direction }}
+                          </span>
+                      </div>
+                      <p class="mt-3 break-words text-base font-semibold leading-snug text-white">{{ item.project }}</p>
+                      <p class="mt-2 break-words text-sm font-medium leading-relaxed text-[#24c781]">{{ item.location }}</p>
+                  </article>
+              </div>
+
+              <div class="hidden overflow-x-auto rounded-2xl border border-[#2f2f2f] bg-[#202020] md:block">
                   <table class="min-w-full divide-y divide-[#2f2f2f]">
                       <thead class="bg-[#1b1b1b]">
                       <tr>
@@ -1425,6 +1444,120 @@ const handleReducedMotionChange = () => {
 const handleMatrixResize = () => {
   sizeMatrixCanvas();
   startMatrixRain();
+  scheduleExpandableTextRefresh();
+};
+
+let expandableTextRefreshTimer = 0;
+
+const isMobileViewport = () => window.matchMedia('(max-width: 640px)').matches;
+
+const expandableTextSelector = 'section article p[class*="leading-relaxed"]';
+
+const resetExpandableText = (element: HTMLElement) => {
+  element.classList.remove('mobile-expandable', 'is-expanded');
+};
+
+const resetExpandableArticle = (element: HTMLElement) => {
+  element.classList.remove('mobile-expandable-item');
+  element.removeAttribute('role');
+  element.removeAttribute('tabindex');
+  element.removeAttribute('aria-expanded');
+};
+
+const refreshExpandableText = () => {
+  const root = resumeRoot.value;
+
+  if (!root) {
+    return;
+  }
+
+  const paragraphs = Array.from(root.querySelectorAll<HTMLElement>(expandableTextSelector));
+  const expandableArticles = new Set<HTMLElement>();
+
+  root.querySelectorAll<HTMLElement>('.mobile-expandable-item').forEach(resetExpandableArticle);
+
+  paragraphs.forEach((paragraph) => {
+    if (!paragraph.textContent?.trim() || !isMobileViewport()) {
+      resetExpandableText(paragraph);
+      return;
+    }
+
+    const wasExpanded = paragraph.classList.contains('is-expanded');
+    paragraph.classList.remove('is-expanded');
+
+    const isClamped = paragraph.scrollHeight > paragraph.clientHeight + 2;
+
+    if (!isClamped) {
+      resetExpandableText(paragraph);
+      return;
+    }
+
+    paragraph.classList.add('mobile-expandable');
+    const article = paragraph.closest<HTMLElement>('article');
+
+    if (article) {
+      expandableArticles.add(article);
+    }
+
+    if (wasExpanded) {
+      paragraph.classList.add('is-expanded');
+    }
+  });
+
+  expandableArticles.forEach((article) => {
+    const isExpanded = article.querySelector('.mobile-expandable.is-expanded') !== null;
+
+    article.classList.add('mobile-expandable-item');
+    article.setAttribute('role', 'button');
+    article.setAttribute('tabindex', '0');
+    article.setAttribute('aria-expanded', String(isExpanded));
+  });
+};
+
+const scheduleExpandableTextRefresh = () => {
+  window.clearTimeout(expandableTextRefreshTimer);
+  expandableTextRefreshTimer = window.setTimeout(refreshExpandableText, 80);
+};
+
+const toggleExpandableArticle = (element: HTMLElement) => {
+  if (!isMobileViewport()) {
+    return;
+  }
+
+  const paragraphs = Array.from(element.querySelectorAll<HTMLElement>('.mobile-expandable'));
+  const isExpanded = !paragraphs.every((paragraph) => paragraph.classList.contains('is-expanded'));
+
+  paragraphs.forEach((paragraph) => {
+    paragraph.classList.toggle('is-expanded', isExpanded);
+  });
+
+  element.setAttribute('aria-expanded', String(isExpanded));
+};
+
+const handleExpandableTextClick = (event: MouseEvent) => {
+  const target = event.target as Element | null;
+  const expandableArticle = target?.closest<HTMLElement>('.mobile-expandable-item');
+
+  if (!expandableArticle || !resumeRoot.value?.contains(expandableArticle)) {
+    return;
+  }
+
+  toggleExpandableArticle(expandableArticle);
+};
+
+const handleExpandableTextKeydown = (event: KeyboardEvent) => {
+  if (event.key !== 'Enter' && event.key !== ' ') {
+    return;
+  }
+
+  const target = event.target as HTMLElement | null;
+
+  if (!target?.classList.contains('mobile-expandable-item')) {
+    return;
+  }
+
+  event.preventDefault();
+  toggleExpandableArticle(target);
 };
 
 const englishCopy: Record<string, string> = {
@@ -1742,6 +1875,7 @@ const translateResumeCopy = async () => {
   }
 
   document.documentElement.lang = 'en';
+  scheduleExpandableTextRefresh();
 };
 
 onMounted(() => {
@@ -1749,17 +1883,23 @@ onMounted(() => {
   sizeMatrixCanvas();
   startMatrixRain();
   void translateResumeCopy();
+  scheduleExpandableTextRefresh();
 
   window.addEventListener('resize', handleMatrixResize);
   window.visualViewport?.addEventListener('resize', handleMatrixResize);
   reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+  resumeRoot.value?.addEventListener('click', handleExpandableTextClick);
+  resumeRoot.value?.addEventListener('keydown', handleExpandableTextKeydown);
 });
 
 onBeforeUnmount(() => {
+  window.clearTimeout(expandableTextRefreshTimer);
   window.cancelAnimationFrame(matrixAnimationFrame);
   window.removeEventListener('resize', handleMatrixResize);
   window.visualViewport?.removeEventListener('resize', handleMatrixResize);
   reducedMotionQuery?.removeEventListener('change', handleReducedMotionChange);
+  resumeRoot.value?.removeEventListener('click', handleExpandableTextClick);
+  resumeRoot.value?.removeEventListener('keydown', handleExpandableTextKeydown);
 });
 
 const socialLinks: SocialItem[] = [

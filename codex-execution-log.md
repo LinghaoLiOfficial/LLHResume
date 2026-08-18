@@ -320,3 +320,52 @@
 - Actions: 新增 `vercel.json`，配置所有路径 rewrite 到 `/index.html`，让 Vercel 静态部署将 `/cn`、`/en` 交给前端页面处理；运行构建并创建本地提交 `9ad1383 Add Vercel SPA rewrite`。
 - Result: 本地已具备 Vercel SPA fallback 配置，理论上重新部署后子路径直连不再 404。
 - Verification: 已运行 `npm run build`，构建通过；`git push origin main` 因当前环境缺少 GitHub HTTPS 凭据和 SSH 公钥未完成，当前 `main` 比 `origin/main` ahead 1。
+
+## 2026-08-19 00:23 +08 - 评估移动端布局与文字优化
+
+- Request: 用户要求全面深度评估如何优化移动端网页的布局、文字等体验。
+- Actions: 检查 `src/views/resume/Resume.vue`、`src/style.css`、`index.html`、`package.json` 与现有技术文档，梳理移动端断点、首屏结构、卡片密度、文字尺度、长文本和表格处理方式，并启动本地开发服务。
+- Result: 发现当前移动端主要问题是桌面简历卡片结构直接压缩为长单列，首屏外边距和圆角偏重，头部联系区存在固定左边距，能力摘要右栏存在小屏左内边距，长段落和表格信息密度过高，viewport 禁止缩放不利于可访问性。
+- Verification: 已运行 `npm run build`，构建通过；已启动 `npm run dev`，服务地址为 `http://localhost:8080/`。
+
+## 2026-08-19 00:32 +08 - 实现移动端布局与文字优化
+
+- Request: 用户要求实现此前评估的移动端网页布局与文字优化。
+- Actions: 修改 `index.html` 移除禁止缩放的 viewport 配置；修改 `src/views/resume/Resume.vue` 为根容器、背景、主卡片、头部、联系方式和能力摘要加入移动端控制类，并为“调研&参会经历”新增手机卡片列表、桌面端保留表格；修改 `src/style.css` 增加 640px 以下的响应式规则，压缩首屏边距和卡片圆角、降低背景动效存在感、移除小屏固定缩进、优化标题/正文行高、长文本移动端截断和换行。
+- Result: 移动端页面首屏更紧凑，联系方式和能力摘要不再被桌面缩进挤压，长英文/中文文本更不易横向溢出，调研经历在手机上由横向表格变为纵向卡片。
+- Verification: 已运行 `npm run build`，构建通过；已启动 `npm run dev` 验证本地服务可运行，地址为 `http://localhost:8080/`。
+
+## 2026-08-19 00:38 +08 - 修复核心演讲经历移动端文字被压缩
+
+- Request: 用户反馈移动端“调研&参会经历”的两个核心演讲经历中文字变成一条竖线，需要修复。
+- Actions: 修改 `src/style.css` 中移动端图标尺寸选择器，从泛化的 `article > div > div:first-child` 收窄为 `article > div.flex > div:first-child`，避免误伤核心演讲经历下方的文本信息卡片。
+- Result: 移动端图标盒子仍保持紧凑尺寸，核心演讲经历中的受众、角色等文字卡片不再被固定宽高压缩。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 00:43 +08 - 收窄移动端头像与姓名间距
+
+- Request: 用户反馈移动端中文界面头像与名字之间的间距过大。
+- Actions: 修改 `src/views/resume/Resume.vue`，为姓名容器加入 `resume-name` 类；修改 `src/style.css`，在 640px 以下将姓名容器顶部 padding 从桌面默认 `2rem` 覆盖为 `0.25rem`。
+- Result: 移动端头像与中文姓名之间的留白明显收窄，桌面端仍保留原有间距。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 00:45 +08 - 增大移动端个人信息与核心要点间距
+
+- Request: 用户反馈移动端出生日期与下面核心要点概括之间的间距过小。
+- Actions: 修改 `src/style.css` 中 640px 以下 `.resume-header` 的 `gap`，从 `1.25rem` 调整为 `2rem`。
+- Result: 移动端个人信息区和核心要点概括之间的垂直间距更舒展。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 00:49 +08 - 支持移动端长文本点击展开
+
+- Request: 用户要求移动端点击某个过长且显示省略号的条目时，可以向下展开全部内容。
+- Actions: 修改 `src/views/resume/Resume.vue`，新增移动端长文本检测、点击事件委托、键盘 Enter/空格展开收起和 resize 后重新检测逻辑；修改 `src/style.css`，为可展开段落增加指针、焦点样式和 `.is-expanded` 解除截断样式。
+- Result: 640px 以下视口中，被 5 行截断的经历描述可点击展开全文，再次点击可收起；未发生截断的段落不会获得展开交互。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 00:58 +08 - 扩大移动端长文本展开点击区域
+
+- Request: 用户要求移动端点击整个条目的任意元素都能触发展开，不仅仅点击段落。
+- Actions: 修改 `src/views/resume/Resume.vue`，将可展开状态提升到包含被截断段落的 `article` 条目上，点击事件和键盘事件改为切换整张条目内所有可展开段落；修改 `src/style.css`，将指针和焦点样式从段落移到可展开条目卡片。
+- Result: 移动端只要条目内存在被省略号截断的段落，点击该条目任意位置即可展开或收起。
+- Verification: 已运行 `npm run build`，构建通过。
