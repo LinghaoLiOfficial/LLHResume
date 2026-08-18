@@ -376,3 +376,73 @@
 - Actions: 修改 `src/views/resume/Resume.vue`，移除移动端长文本全页 `scrollHeight/clientHeight` 截断检测、定时刷新和 resize 后重新测量逻辑，改为点击时按需查找当前条目内长段落并切换 `article.is-expanded`；修改 `src/style.css`，移除可能加重长页面样式计算的 `:has(...)` 选择器。
 - Result: 移动端不再在首轮渲染或 resize 时批量测量大量段落布局，滚动和内容出现应更轻；整条目点击展开功能保留。
 - Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:11 +08 - 微调移动端联系方式图标位置
+
+- Request: 用户要求移动端界面中邮箱、联系号码、出生日期三个 icon 略微向下移动。
+- Actions: 修改 `src/style.css`，在 640px 以下为 `.resume-contact > div > div:first-child` 增加 `margin-top: 0.125rem`。
+- Result: 移动端联系方式三个圆形 icon 相对文字略微下移，桌面端不受影响。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:14 +08 - 本地化首屏联系方式图标
+
+- Request: 用户反馈移动端邮箱、联系号码、出生日期三个 icon 加载速度过慢。
+- Actions: 修改 `src/views/resume/Resume.vue`，从 `@iconify/vue` 引入 `addIcon`，将邮箱、电话、日历三个首屏图标注册为本地 `resume:*` 图标，并替换原来的远程图标名。
+- Result: 三个首屏联系方式 icon 不再依赖远程图标集解析，移动端应更快显示。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:16 +08 - 关闭移动端数字雨持续动画
+
+- Request: 用户反馈移动端动态数字雨依旧较为卡顿。
+- Actions: 修改 `src/views/resume/Resume.vue`，将移动端 640px 以下的 Matrix 背景从持续 `requestAnimationFrame` 动画切换为一次性静态数字纹理；桌面端和非移动端仍保留动态数字雨。
+- Result: 移动端不再持续重绘 canvas，滚动性能应明显改善，同时保留数字氛围背景。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:19 +08 - 修正本地联系方式图标主题色
+
+- Request: 用户要求邮箱、联系号码、出生日期三个 icon 为主题色绿色。
+- Actions: 修改 `src/views/resume/Resume.vue` 中本地 `resume:*` 图标定义，为三个 SVG 图标增加 `fill="none"`、`stroke="currentColor"`、圆角描边和统一描边宽度。
+- Result: 三个首屏联系方式 icon 稳定继承外层 `text-[#24c781]` 主题绿色。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:23 +08 - 增强移动端静态数字雨背景
+
+- Request: 用户希望移动端也体现数字雨背景，并改为静态数字雨。
+- Actions: 修改 `src/views/resume/Resume.vue`，在静态 Matrix 纹理绘制中针对 640px 以下视口提高数字透明度、降低行距并增加绘制概率；修改 `src/style.css`，将移动端 canvas 透明度从 `0.48` 提高到 `0.62`。
+- Result: 移动端继续只绘制一次静态数字雨，不运行持续动画，同时数字雨视觉更明显。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:29 +08 - 凸显移动端两侧数字雨
+
+- Request: 用户反馈移动端数字雨看不见、太淡，并希望左右边缘显式凸显数字雨。
+- Actions: 修改 `src/views/resume/Resume.vue` 的静态 Matrix 纹理绘制逻辑，在 640px 以下根据距离左右边缘的远近提升数字透明度和绘制密度，中间区域保持较淡；修改 `src/style.css`，将移动端 canvas 透明度提高到 `0.9`。
+- Result: 移动端左右边缘出现更明显的绿色数字雨，中间内容区域仍保持较低干扰。
+- Verification: 已运行 `npm run build`，构建通过；已启动本地服务 `http://localhost:8081/` 并用 390x844 手机视口截图检查，左右边缘数字雨可见。
+
+## 2026-08-19 01:30 +08 - 移动端去除数字雨
+
+- Request: 用户认为移动端数字雨不好看，要求移动端全部去除数字雨。
+- Actions: 修改 `src/views/resume/Resume.vue`，让 `startMatrixRain` 在 640px 以下直接返回，不绘制也不启动动画；修改 `src/style.css`，在 640px 以下隐藏 Matrix canvas。
+- Result: 移动端完全不显示数字雨背景，桌面端继续保留动态数字雨。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:39 +08 - 实现移动端视频数字雨背景
+
+- Request: 用户希望移动端改为视频展示动态数字雨以解决卡顿，并明确不要省电/减少动态分支。
+- Actions: 使用临时工具链生成 `public/matrix-mobile.mp4` 循环视频资源；修改 `src/views/resume/Resume.vue`，在 canvas 后加入移动端视频背景 `<video autoplay loop muted playsinline preload="auto">`；修改 `src/style.css`，默认隐藏视频并在 640px 以下显示，移动端继续隐藏 canvas，桌面端继续使用原 canvas 数字雨。
+- Result: 移动端通过本地 MP4 视频展示动态数字雨，不再依赖移动端 canvas 持续绘制；桌面端保留原动态 canvas。
+- Verification: 已运行 `npm run build`，构建通过；`public/matrix-mobile.mp4` 约 80KB；已启动本地服务确认可运行，服务临时地址为 `http://localhost:8081/`。
+
+## 2026-08-19 01:44 +08 - 修正移动端视频数字字符集
+
+- Request: 用户反馈视频版动态数字雨中的数字错误地只有 `0` 或 `1`，需要改为 `0` 到 `9` 随机。
+- Actions: 重新生成 `public/matrix-mobile.mp4`，将视频点阵字符集从二进制 `0/1` 扩展为 `0-9` 随机数字。
+- Result: 移动端视频数字雨现在使用 `0` 到 `9` 的随机数字，视频大小约 92KB。
+- Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:47 +08 - 加快移动端视频数字雨速度
+
+- Request: 用户要求加快移动端视频中的数字雨下落速度。
+- Actions: 重新生成 `public/matrix-mobile.mp4`，提高每列数字雨的下落速度范围，保留 `0-9` 随机数字字符集和原移动端视频接入方式。
+- Result: 移动端视频数字雨下落更快，视频大小约 104KB。
+- Verification: 已运行 `npm run build`，构建通过。

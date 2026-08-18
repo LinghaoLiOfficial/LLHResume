@@ -10,6 +10,18 @@
       class="pointer-events-none fixed inset-0 z-[1] h-screen w-screen opacity-90"
     />
 
+    <video
+      aria-hidden="true"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+      class="matrix-mobile-video pointer-events-none fixed inset-0 z-[1] h-screen w-screen object-cover"
+    >
+      <source src="/matrix-mobile.mp4" type="video/mp4">
+    </video>
+
     <div class="resume-bg pointer-events-none fixed inset-0 z-0">
       <div class="absolute left-[12%] top-16 h-72 w-72 rounded-full bg-[#24c781]/25 blur-[120px]" />
       <div class="absolute bottom-20 right-[14%] h-80 w-80 rounded-full bg-[#24c781]/20 blur-[140px]" />
@@ -39,7 +51,7 @@
                 <div class="resume-contact flex flex-col space-y-4 mt-8 ml-10">
                     <div class="flex flex-row space-x-2 items-center">
                         <div class="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-[#202020] transition border-[#24c781] text-[#24c781]">
-                            <Icon icon="ic:round-email" class="text-base" />
+                            <Icon icon="resume:mail" class="text-base" />
                         </div>
                         <div class="flex flex-col space-y-1">
                             <span class="text-[#24c781]">邮箱</span>
@@ -48,7 +60,7 @@
                     </div>
                     <div class="flex flex-row space-x-2 items-center">
                         <div class="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-[#202020] transition border-[#24c781] text-[#24c781]">
-                            <Icon icon="typcn:phone" class="text-base" />
+                            <Icon icon="resume:phone" class="text-base" />
                         </div>
                         <div class="flex flex-col space-y-1">
                             <span class="text-[#24c781]">联系号码</span>
@@ -58,7 +70,7 @@
                     </div>
                     <div class="flex flex-row space-x-2 items-center">
                         <div class="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-[#202020] transition border-[#24c781] text-[#24c781]">
-                            <Icon icon="lucide:calendar-days" class="text-base" />
+                            <Icon icon="resume:calendar-days" class="text-base" />
                         </div>
                         <div class="flex flex-col space-y-1">
                             <span class="text-[#24c781]">出生日期</span>
@@ -1248,7 +1260,7 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { Icon, addIcon } from '@iconify/vue';
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 
 interface StatItem {
@@ -1293,6 +1305,24 @@ const resumeRoot = ref<HTMLElement | null>(null);
 
 const activeLocale = window.location.pathname === '/en' ? 'en' : 'zh-CN';
 
+addIcon('resume:mail', {
+  width: 24,
+  height: 24,
+  body: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g>',
+});
+
+addIcon('resume:phone', {
+  width: 24,
+  height: 24,
+  body: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
+});
+
+addIcon('resume:calendar-days', {
+  width: 24,
+  height: 24,
+  body: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></g>',
+});
+
 type MatrixColumn = {
   y: number;
   speed: number;
@@ -1311,6 +1341,8 @@ let lastMatrixFrame = 0;
 let reducedMotionQuery: MediaQueryList | null = null;
 let logicalCanvasWidth = 0;
 let logicalCanvasHeight = 0;
+
+const isMobileViewport = () => window.matchMedia('(max-width: 640px)').matches;
 
 const randomMatrixCharacter = () => matrixCharacters[Math.floor(Math.random() * matrixCharacters.length)];
 
@@ -1359,13 +1391,25 @@ const drawStaticMatrixTexture = () => {
   context.font = `${matrixFontSize}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace`;
   context.textAlign = 'center';
   context.textBaseline = 'top';
-  context.fillStyle = 'rgba(36, 199, 129, 0.12)';
+  context.fillStyle = isMobileViewport() ? 'rgba(36, 199, 129, 0.24)' : 'rgba(36, 199, 129, 0.12)';
+
+  const isMobile = isMobileViewport();
+  const rowStep = matrixFontSize * (isMobile ? 3.3 : 6);
+  const drawThreshold = isMobile ? 0.46 : 0.62;
+  const edgeBandWidth = Math.min(92, logicalCanvasWidth * 0.24);
 
   matrixColumns.forEach((_, columnIndex) => {
     const x = columnIndex * matrixColumnWidth + matrixColumnWidth / 2;
-    for (let y = 0; y < logicalCanvasHeight; y += matrixFontSize * 6) {
-      if (Math.random() > 0.62) {
-        context.fillText(randomMatrixCharacter(), x, y + Math.random() * matrixFontSize * 4);
+    const distanceToEdge = Math.min(x, logicalCanvasWidth - x);
+    const edgeStrength = isMobile ? Math.max(0, 1 - distanceToEdge / edgeBandWidth) : 0;
+    const opacity = isMobile ? 0.2 + edgeStrength * 0.58 : 0.12;
+    const threshold = isMobile ? drawThreshold - edgeStrength * 0.22 : drawThreshold;
+
+    context.fillStyle = `rgba(36, 199, 129, ${opacity})`;
+
+    for (let y = 0; y < logicalCanvasHeight; y += rowStep) {
+      if (Math.random() > threshold) {
+        context.fillText(randomMatrixCharacter(), x, y + Math.random() * matrixFontSize * (isMobile ? 2.2 : 4));
       }
     }
   });
@@ -1428,6 +1472,10 @@ const startMatrixRain = () => {
   window.cancelAnimationFrame(matrixAnimationFrame);
   lastMatrixFrame = 0;
 
+  if (isMobileViewport()) {
+    return;
+  }
+
   if (reducedMotionQuery?.matches) {
     drawStaticMatrixTexture();
     return;
@@ -1445,8 +1493,6 @@ const handleMatrixResize = () => {
   sizeMatrixCanvas();
   startMatrixRain();
 };
-
-const isMobileViewport = () => window.matchMedia('(max-width: 640px)').matches;
 
 const expandableTextSelector = 'section article p[class*="leading-relaxed"]';
 

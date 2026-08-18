@@ -12,12 +12,13 @@
 - `src/views/resume/Resume.vue` 承载主要简历页面视图。
 - `src/views/resume/Resume.vue` 通过 `window.location.pathname` 识别语言路径；在 `/en` 下会在首轮渲染后遍历文本节点并用英文翻译字典替换页面文案，未引入 Vue Router。
 - `vercel.json` 为 Vercel 静态部署配置 SPA fallback，将所有路径 rewrite 到 `/index.html`，避免直接访问 `/cn`、`/en` 时由平台按真实文件查找而返回 `404: NOT_FOUND`。
-- `src/views/resume/Resume.vue` 内置 Matrix 风格绿色随机数字雨背景；原绿色光斑和竖排 `Resume` 文字使用 `fixed inset-0 z-0` 底层，canvas 使用 `fixed inset-0 h-screen w-screen`、`z-[1]` 与 `pointer-events-none`，主体内容保持 `relative z-10`。
+- `src/views/resume/Resume.vue` 内置 Matrix 风格绿色随机数字雨背景；原绿色光斑和竖排 `Resume` 文字使用 `fixed inset-0 z-0` 底层，桌面 canvas 使用 `fixed inset-0 h-screen w-screen`、`z-[1]` 与 `pointer-events-none`，移动端视频背景同样位于 `z-[1]`，主体内容保持 `relative z-10`。
 - 移动端通过 `resume-page`、`resume-bg`、`resume-shell`、`resume-card`、`resume-header`、`resume-profile`、`resume-contact`、`resume-intro` 等类在 `src/style.css` 中集中控制 640px 以下布局；桌面端继续主要依赖 Tailwind 工具类。
-- 数字雨动画使用 `requestAnimationFrame`，canvas 每帧通过 `clearRect` 透明清空后为每列即时绘制 5-9 个逐渐变淡的数字短串，只绘制当前 viewport 尺寸，DPR 上限为 `1.5`，不再依赖旧帧残影、文字阴影或深色覆盖层，并通过 `prefers-reduced-motion` 在减少动态效果时切换为淡绿色静态纹理。
+- 桌面端数字雨动画使用 `requestAnimationFrame`，canvas 每帧通过 `clearRect` 透明清空后为每列即时绘制 5-9 个逐渐变淡的数字短串，只绘制当前 viewport 尺寸，DPR 上限为 `1.5`，不再依赖旧帧残影、文字阴影或深色覆盖层；通过 `prefers-reduced-motion` 在减少动态效果时切换为淡绿色静态纹理。640px 以下移动端隐藏 canvas，改用 `public/matrix-mobile.mp4` 作为自动播放、循环、静音、`playsinline` 的视频背景；按当前产品决定，移动端视频不额外接入减少动态效果分支。
 - 简历头部姓名区域采用中文名在上、英文名与昵称 `Linghao Li (Lion)` 在下的垂直展示。
 - 左侧联系方式采用纵向列表，邮箱独立展示；电话、微信、WhatsApp 合并为一个“联系号码”条目，并用 `电话 · 微信 · WhatsApp` 标明支持渠道。
 - 左侧个人信息区在联系方式下方展示出生日期 `2002 年 11 月 21 日`，使用 `lucide:calendar-days` 图标。
+- 首屏联系方式中的邮箱、电话、日历图标已通过 `@iconify/vue` 的 `addIcon` 注册为本地 `resume:mail`、`resume:phone`、`resume:calendar-days`，避免移动端首屏等待远程图标集加载；三个图标均使用 `stroke="currentColor"`，继承外层主题绿色。
 - 简历头部右侧四段能力简介使用 `flex h-full flex-col justify-center`，作为整体在 header 右栏中垂直居中。
 - 头部能力简介保持四条主线不变，其中 `AI 模型算法工程化落地` 融合了 `Vibe Coding` 的需求拆解、原型验证与迭代落地表达，`跨领域技术结合` 融合了实验室科研经验、文献研读、实验设计与复现验证表达。
 - 教育背景之前新增了“未来发展”模块，使用两张卡片分别表达 `读博？` 与 `创业？` 的规划：读博方向优先考虑新加坡、香港、上海或浙江，创业方向强调依托高校资源和科研成果转化。
@@ -40,6 +41,7 @@
 - `index.html`: 页面入口、网页标签标题、favicon 引用。
 - `public/favicon.svg`: 网页标签图标，当前为单个居中 `L`。
 - `public/avatar.jpg`: 简历页面头像资源。
+- `public/matrix-mobile.mp4`: 移动端数字雨循环背景视频，约 104KB，字符集为 `0-9` 随机数字，当前版本下落速度较快，在 640px 以下由页面 `<video>` 加载。
 - `vite.config.ts`: Vite 配置。
 - `vercel.json`: Vercel rewrite 配置，用于支持前端路径直连。
 - `package.json`: 项目脚本与依赖声明。
@@ -74,6 +76,6 @@
 - 已完成上线可行性评估：当前构建通过，静态资源体量较小，适合静态托管。
 - 中国大陆与全球同时稳定访问尚未实测，最终可达性取决于托管节点、DNS、域名状态和网络环境。
 - 若采用中国大陆节点，需预留域名实名认证、ICP备案、公安联网备案等合规流程评估；若仅部署在境外节点，通常可免去大陆服务器备案流程，但不能承诺中国大陆网络环境下始终稳定访问。
-- 移动端第一轮布局优化已完成：外层边距、主卡片 padding/圆角/阴影、头像尺寸、姓名字号、头像与姓名间距、个人信息与核心要点间距、联系方式缩进、能力摘要缩进、背景数字雨透明度和竖排 `Resume` 装饰均已针对 640px 以下视口处理。移动端图标尺寸规则当前仅作用于 `article > div.flex > div:first-child`，避免误伤“核心演讲经历”中的文本信息卡片。
+- 移动端第一轮布局优化已完成：外层边距、主卡片 padding/圆角/阴影、头像尺寸、姓名字号、头像与姓名间距、个人信息与核心要点间距、联系方式缩进、联系方式图标垂直位置、能力摘要缩进、背景数字雨透明度和竖排 `Resume` 装饰均已针对 640px 以下视口处理。移动端图标尺寸规则当前仅作用于 `article > div.flex > div:first-child`，避免误伤“核心演讲经历”中的文本信息卡片。
 - 移动端正文当前采用 CSS 统一控制标题降级、正文行高提升、长文本 `overflow-wrap` 和最多 5 行截断；为避免长页面首轮渲染和滚动卡顿，展开交互不再批量测量所有段落高度，而是在 640px 以下点击条目时按需切换对应 `article.is-expanded`。
 - `index.html` viewport 已移除 `maximum-scale=1.0, user-scalable=no`，允许移动端用户缩放页面。

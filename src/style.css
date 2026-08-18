@@ -15,13 +15,22 @@ body {
   box-sizing: border-box;
 }
 
+.matrix-mobile-video {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .resume-page {
     padding: 1rem 0.75rem 1.5rem;
   }
 
   .resume-page canvas {
-    opacity: 0.48;
+    display: none;
+  }
+
+  .matrix-mobile-video {
+    display: block;
+    opacity: 0.8;
   }
 
   .resume-bg p {
@@ -83,6 +92,10 @@ body {
   .resume-contact > div {
     min-width: 0;
     align-items: flex-start;
+  }
+
+  .resume-contact > div > div:first-child {
+    margin-top: 0.125rem;
   }
 
   .resume-contact span {
