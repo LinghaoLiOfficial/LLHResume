@@ -10,18 +10,6 @@
       class="pointer-events-none fixed inset-0 z-[1] h-screen w-screen opacity-90"
     />
 
-    <video
-      aria-hidden="true"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="auto"
-      class="matrix-mobile-video pointer-events-none fixed inset-0 z-[1] h-screen w-screen object-cover"
-    >
-      <source src="/matrix-mobile.mp4" type="video/mp4">
-    </video>
-
     <div class="resume-bg pointer-events-none fixed inset-0 z-0">
       <div class="absolute left-[12%] top-16 h-72 w-72 rounded-full bg-[#24c781]/25 blur-[120px]" />
       <div class="absolute bottom-20 right-[14%] h-80 w-80 rounded-full bg-[#24c781]/20 blur-[140px]" />

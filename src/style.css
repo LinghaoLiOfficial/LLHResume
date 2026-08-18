@@ -15,10 +15,6 @@ body {
   box-sizing: border-box;
 }
 
-.matrix-mobile-video {
-  display: none;
-}
-
 @media (max-width: 640px) {
   .resume-page {
     padding: 1rem 0.75rem 1.5rem;
@@ -26,11 +22,6 @@ body {
 
   .resume-page canvas {
     display: none;
-  }
-
-  .matrix-mobile-video {
-    display: block;
-    opacity: 0.8;
   }
 
   .resume-bg p {

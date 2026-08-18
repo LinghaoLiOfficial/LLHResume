@@ -12,9 +12,9 @@
 - `src/views/resume/Resume.vue` 承载主要简历页面视图。
 - `src/views/resume/Resume.vue` 通过 `window.location.pathname` 识别语言路径；在 `/en` 下会在首轮渲染后遍历文本节点并用英文翻译字典替换页面文案，未引入 Vue Router。
 - `vercel.json` 为 Vercel 静态部署配置 SPA fallback，将所有路径 rewrite 到 `/index.html`，避免直接访问 `/cn`、`/en` 时由平台按真实文件查找而返回 `404: NOT_FOUND`。
-- `src/views/resume/Resume.vue` 内置 Matrix 风格绿色随机数字雨背景；原绿色光斑和竖排 `Resume` 文字使用 `fixed inset-0 z-0` 底层，桌面 canvas 使用 `fixed inset-0 h-screen w-screen`、`z-[1]` 与 `pointer-events-none`，移动端视频背景同样位于 `z-[1]`，主体内容保持 `relative z-10`。
+- `src/views/resume/Resume.vue` 内置 Matrix 风格绿色随机数字雨背景；原绿色光斑和竖排 `Resume` 文字使用 `fixed inset-0 z-0` 底层，桌面 canvas 使用 `fixed inset-0 h-screen w-screen`、`z-[1]` 与 `pointer-events-none`，主体内容保持 `relative z-10`。
 - 移动端通过 `resume-page`、`resume-bg`、`resume-shell`、`resume-card`、`resume-header`、`resume-profile`、`resume-contact`、`resume-intro` 等类在 `src/style.css` 中集中控制 640px 以下布局；桌面端继续主要依赖 Tailwind 工具类。
-- 桌面端数字雨动画使用 `requestAnimationFrame`，canvas 每帧通过 `clearRect` 透明清空后为每列即时绘制 5-9 个逐渐变淡的数字短串，只绘制当前 viewport 尺寸，DPR 上限为 `1.5`，不再依赖旧帧残影、文字阴影或深色覆盖层；通过 `prefers-reduced-motion` 在减少动态效果时切换为淡绿色静态纹理。640px 以下移动端隐藏 canvas，改用 `public/matrix-mobile.mp4` 作为自动播放、循环、静音、`playsinline` 的视频背景；按当前产品决定，移动端视频不额外接入减少动态效果分支。
+- 桌面端数字雨动画使用 `requestAnimationFrame`，canvas 每帧通过 `clearRect` 透明清空后为每列即时绘制 5-9 个逐渐变淡的数字短串，只绘制当前 viewport 尺寸，DPR 上限为 `1.5`，不再依赖旧帧残影、文字阴影或深色覆盖层；通过 `prefers-reduced-motion` 在减少动态效果时切换为淡绿色静态纹理。640px 以下移动端隐藏 canvas，且不再加载视频数字雨资源。
 - 简历头部姓名区域采用中文名在上、英文名与昵称 `Linghao Li (Lion)` 在下的垂直展示。
 - 左侧联系方式采用纵向列表，邮箱独立展示；电话、微信、WhatsApp 合并为一个“联系号码”条目，并用 `电话 · 微信 · WhatsApp` 标明支持渠道。
 - 左侧个人信息区在联系方式下方展示出生日期 `2002 年 11 月 21 日`，使用 `lucide:calendar-days` 图标。
@@ -41,7 +41,6 @@
 - `index.html`: 页面入口、网页标签标题、favicon 引用。
 - `public/favicon.svg`: 网页标签图标，当前为单个居中 `L`。
 - `public/avatar.jpg`: 简历页面头像资源。
-- `public/matrix-mobile.mp4`: 移动端数字雨循环背景视频，约 104KB，字符集为 `0-9` 随机数字，当前版本下落速度较快，在 640px 以下由页面 `<video>` 加载。
 - `vite.config.ts`: Vite 配置。
 - `vercel.json`: Vercel rewrite 配置，用于支持前端路径直连。
 - `package.json`: 项目脚本与依赖声明。

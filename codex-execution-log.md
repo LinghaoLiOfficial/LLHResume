@@ -446,3 +446,10 @@
 - Actions: 重新生成 `public/matrix-mobile.mp4`，提高每列数字雨的下落速度范围，保留 `0-9` 随机数字字符集和原移动端视频接入方式。
 - Result: 移动端视频数字雨下落更快，视频大小约 104KB。
 - Verification: 已运行 `npm run build`，构建通过。
+
+## 2026-08-19 01:53 +08 - 再次移除移动端数字雨
+
+- Request: 用户测试后认为移动端视频数字雨效果仍不好，要求移动端再次全部去除数字雨。
+- Actions: 修改 `src/views/resume/Resume.vue`，移除移动端视频背景 `<video>`；修改 `src/style.css`，删除移动端视频样式并继续在 640px 以下隐藏 canvas；删除不再引用的 `public/matrix-mobile.mp4`。
+- Result: 移动端不再显示或加载任何数字雨资源，桌面端继续保留 canvas 数字雨。
+- Verification: 已运行 `npm run build`，构建通过。
